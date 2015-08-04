@@ -233,7 +233,9 @@
         <h3 id="maven快速入门">maven快速入门</h3><ol>
 <li>maven介绍以及环境搭建<br>maven是基于项目对象模型(pom),可以通过一小段描述信息来管理项目的构建、<br>报告、和文档的软件项目管理工具。覆盖编译，打包，清理等周期。<br><a href="http://maven.apache.org" target="_blank" rel="external">maven下载地址：</a> 中进行下载。<br>下载解压后有四个文件夹。bin中是一些mvn的运行脚本。在命令行中可以用mvn进行调用这些脚本。<br>boot下面是一个maven的类加载器的框架。config下面是配置文件，例如主要的settings配置文件。<br>lib目录下面是maven常用的一些jar。</li>
 <li>配置环境变量<br>在系统变量中新建一个M2_HOME路径为maven的安装目录。<br>然后在path中加入%M2_HOME/bin。然后在命令行中输入mvn -v来查看是否安装成功。</li>
-<li>maven pom文件中几个属性值<br>groupId为项目的包名<br>artifactId是模块名（项目名）<br>version SNAPSHOT就是快照一般用0.0.1SNAPSHOT<h3 id="maven核心知识">maven核心知识</h3></li>
+<li>maven pom文件中几个属性值<br>groupId为项目的包名;<br>artifactId是模块名（项目名）;<br>version SNAPSHOT就是快照（一般用0.0.1SNAPSHOT）;</li>
+</ol>
+<h3 id="maven核心知识">maven核心知识</h3><ol>
 <li>常用的构建命令<br>mvn- v 查看版本<br>  compile 编译<br>  test 测试<br>  package 打包<br>  clean 删除target<br>  install 安装jar到本地仓库中 </li>
 <li>自动创建目录骨架 archetype插件<br>mvn -archetype generate 下载插件<br>按照提示去创建，也可以直接在后面跟上 -DgroupId -DartifactId -Dversion -Dpackage</li>
 <li>maven中的坐标和仓库<br>坐标：groupId为项目的包名<br>   artifactId是模块名（项目名）<br>   version 版本<br>仓库：本地<br>   远程(lib目录下面的maven-model-bulider.jar中pom文件中)<br>镜像仓库：settings.xml中的mirrors中的mirror<br>更改仓库位置：settings.xml中localRepository属性进行配置更改<pre><code>例如改为<span class="constant">E</span><span class="symbol">:/myMavenStore</span>,然后将settings文件放到当前文件夹中，方便以后修改管理
