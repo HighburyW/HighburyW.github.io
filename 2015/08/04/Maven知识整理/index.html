@@ -239,7 +239,16 @@
 <li>maven中的坐标和仓库<br>坐标：groupId为项目的包名<br>   artifactId是模块名（项目名）<br>   version 版本<br>仓库：本地<br>   远程(lib目录下面的maven-model-bulider.jar中pom文件中)<br>镜像仓库：settings.xml中的mirrors中的mirror<br>更改仓库位置：settings.xml中localRepository属性进行配置更改<pre><code>例如改为<span class="constant">E</span><span class="symbol">:/myMavenStore</span>,然后将settings文件放到当前文件夹中，方便以后修改管理
 </code></pre></li>
 <li>在eclipse4.0以后，将maven插件是内置的不需要下载。如果用以前的版本，可以下载插件，不再赘述。<br>在eclipse中选择新建maven项目有两种。<br>maven-archetype-quickstart<br>默认的Archetype,基本内容包括：<br>一个包含junit依赖声明的pom.xml<br>src/main/java主代码目录及一个名为App的类<br>src/test/java测试代码目录及一个名为AppTest的测试用例<br>maven-archetype-webapp<br>一个最简单的Maven war项目模板，当需要快速创建一个Web应用的时候可以使用它。生成的项目内容包括：<br>一个packaging为war且带有junit依赖声明的pom.xml<br>src/main/webapp/目录<br>src/main/webapp/index.jsp文件<br>src/main/webapp/WEB-INF/web.xml文件</li>
-<li><p>maven的生命周期和插件<br>完整的项目构建过程包括：<br>清理，编译，测试，打包，集成测试，验证，部署<br>maven的生命周期：<br>  clean   清理项目<br>  default 构建项目<br>  compile test package install<br>  site    生成项目站点<br>  pre-site 在生成站点前完成的工作<br>  site 生成项目的站点文档<br>  post-site 在生成项目站点后要完成的工作<br>  site-deploy 发布生成的站点到服务器上<br>maven的插件有很多。比如将项目源码打包的source，还有代码检测的findbugs等等。<br>具体配置例如：</p>
+<li><p>maven的生命周期和插件<br>完整的项目构建过程包括：<br>清理，编译，测试，打包，集成测试，验证，部署<br>maven的生命周期：</p>
+<pre><code>clean   清理项目
+<span class="keyword">default</span> 构建项目
+<span class="keyword">compile</span> test <span class="keyword">package</span> install
+site    生成项目站点
+pre-site 在生成站点前完成的工作
+site 生成项目的站点文档
+post-site 在生成项目站点后要完成的工作
+site-deploy 发布生成的站点到服务器上
+</code></pre><p>maven的插件有很多。比如将项目源码打包的source，还有代码检测的findbugs等等。<br>具体配置例如：</p>
 <pre><code>`<span class="tag">&lt;<span class="title">plugin</span>&gt;</span>
     <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
         <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>findbugs-maven-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
@@ -285,12 +294,18 @@
 <span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span>`
 </code></pre></li>
 <li>依赖冲突<br>依赖冲突就是说A，B依赖了不同的版本一个构建，但是C又同时依赖A,B.这样就导致了版本冲突。<br>解决的方案：<pre><code>9<span class="class">.1</span> 短路优先  依据读取的路径，依赖离得最近的优先解析。
-    举例：<span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">C</span>&gt;<span class="tag">X</span><span class="class">.jar</span>
-          <span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">X</span><span class="class">.1</span><span class="class">.jar</span>
-    优先解析的是   <span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">X</span><span class="class">.1</span><span class="class">.jar</span>
+     举例：<span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">C</span>&gt;<span class="tag">X</span><span class="class">.jar</span>
+           <span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">X</span><span class="class">.1</span><span class="class">.jar</span>
+     优先解析的是   <span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">X</span><span class="class">.1</span><span class="class">.jar</span>
 9<span class="class">.2</span> 先声明先优先  如果路径也相同，那就是看配置的先后顺序
 </code></pre></li>
-<li>聚合和继承<br>10.1 如果将多个项目install安装到本地仓库中，对此依次执行，但是可以有聚合的方式，一次执行它。<br>在聚合项目的pom中将最上面的package改为pom<br>不用dependencys 而是使用modules 然后将install的项目配置的module标签中。(eclipse可以自动提示)<br>10.2 继承<br>使用parent标签。</li>
+<li>聚合和继承<pre><code>10.1 聚合
+     如果将多个项目<span class="operator"><span class="keyword">install</span>安装到本地仓库中，对此依次执行，但是可以有聚合的方式，一次执行它。
+     在聚合项目的pom中将最上面的package改为pom。不用dependencys 而是使用modules 然后将<span class="keyword">install</span>的项目配置的<span class="keyword">module</span>标签中。
+     (eclipse可以自动提示)
+<span class="number">10.2</span> 继承 
+     使用parent标签。</span>
+</code></pre></li>
 </ol>
 
       
