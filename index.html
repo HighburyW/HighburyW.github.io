@@ -221,6 +221,152 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-08-04T03:12:56.000Z"><a href="/2015/08/04/Java删除ArrayList中重复的元素/">2015-08-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/08/04/Java删除ArrayList中重复的元素/">Java删除ArrayList中重复的元素</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Java删除ArrayList中的重复元素的2种方法">Java删除ArrayList中的重复元素的2种方法</h1><p>ArrayList是我们经常使用的集合类型之一。它允许我们添加多个null元素，重复的元素，还能够保持插入的顺序。<br>在具体学习和工作中我们经常会遇到需要删除ArrayList中重复的数据。下面我将代码举例探讨下两种删除的方法。</p>
+<h2 id="方法1：使用HashSet删除ArrayList中重复的元素">方法1：使用HashSet删除ArrayList中重复的元素</h2><p>在该方法中，我们使用HashSet来删除重复的元素。如你所知，HashSet不允许有重复的元素。我们使用HashSet的<br>这个属性来删除已建成的ArrayList中的重复元素。但是，这种方法有一个缺点。那就是，它会删除ArrayList中元<br>素的插入顺序。这意味着，删除重复的元素后，元素的插入顺序就不对了。先来看下面这个例子。</p>
+<pre><code>`<span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.HashSet;
+
+<span class="keyword">public</span> class MainClass
+{
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args)
+    {
+        <span class="comment">//Constructing An ArrayList</span>
+
+        ArrayList&lt;<span class="keyword">String</span>&gt; listWithDuplicateElements = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JAVA"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"J2EE"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JSP"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"SERVLETS"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JAVA"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"STRUTS"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JSP"</span>);
+
+        <span class="comment">//Printing listWithDuplicateElements</span>
+
+        System.out.<span class="built_in">print</span>(<span class="string">"ArrayList With Duplicate Elements :"</span>);
+
+        System.out.<span class="built_in">println</span>(listWithDuplicateElements);
+
+        <span class="comment">//Constructing HashSet using listWithDuplicateElements</span>
+
+        HashSet&lt;<span class="keyword">String</span>&gt; <span class="built_in">set</span> = <span class="keyword">new</span> HashSet&lt;<span class="keyword">String</span>&gt;(listWithDuplicateElements);
+
+        <span class="comment">//Constructing listWithoutDuplicateElements using set</span>
+
+        ArrayList&lt;<span class="keyword">String</span>&gt; listWithoutDuplicateElements = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;(<span class="built_in">set</span>);
+
+        <span class="comment">//Printing listWithoutDuplicateElements</span>
+
+        System.out.<span class="built_in">print</span>(<span class="string">"ArrayList After Removing Duplicate Elements :"</span>);
+
+        System.out.<span class="built_in">println</span>(listWithoutDuplicateElements);
+    }
+}
+`
+</code></pre><p>输出结果：<br>       <code>ArrayList With Duplicate Elements :[JAVA, J2EE, JSP, SERVLETS, JAVA, STRUTS, JSP]
+        ArrayList After Removing Duplicate Elements :[JAVA, SERVLETS, JSP, J2EE, STRUTS]</code></p>
+<p>注意输出结果。你会发现，在删除重复元素之后，元素重新洗牌。不再按照插入顺序排列。如果你想在删除重复的元素<br>之后依然保持元素的插入顺序，那么不建议使用此方法。还有另一种方法，可以保证在删除重复的元素之后也不改变元<br>素的插入顺序。那就是使用LinkedHashSet。</p>
+<h2 id="方法2：使用LinkedHashSet删除ArrayList中重复的元素">方法2：使用LinkedHashSet删除ArrayList中重复的元素</h2><p>在该方法中，我们使用LinkedHashSet删除ArrayList中重复的元素。正如你知道的，LinkedHashSet不允许重复元素，同<br>时保持元素的插入顺序。LinkedHashSet的这两个属性可以确保在删除ArrayList中的重复元素之后，依然保持元素的插<br>入顺序。参见下面的例子。</p>
+<pre><code>`<span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.LinkedHashSet;
+
+<span class="keyword">public</span> class MainClass
+{
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args)
+    {
+        <span class="comment">//Constructing An ArrayList</span>
+
+        ArrayList&lt;<span class="keyword">String</span>&gt; listWithDuplicateElements = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JAVA"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"J2EE"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JSP"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"SERVLETS"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JAVA"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"STRUTS"</span>);
+
+        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JSP"</span>);
+
+        <span class="comment">//Printing listWithDuplicateElements</span>
+
+        System.out.<span class="built_in">print</span>(<span class="string">"ArrayList With Duplicate Elements :"</span>);
+
+        System.out.<span class="built_in">println</span>(listWithDuplicateElements);
+
+        <span class="comment">//Constructing LinkedHashSet using listWithDuplicateElements</span>
+
+        LinkedHashSet&lt;<span class="keyword">String</span>&gt; <span class="built_in">set</span> = <span class="keyword">new</span> LinkedHashSet&lt;<span class="keyword">String</span>&gt;(listWithDuplicateElements);
+
+        <span class="comment">//Constructing listWithoutDuplicateElements using set</span>
+
+        ArrayList&lt;<span class="keyword">String</span>&gt; listWithoutDuplicateElements = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;(<span class="built_in">set</span>);
+
+        <span class="comment">//Printing listWithoutDuplicateElements</span>
+
+        System.out.<span class="built_in">print</span>(<span class="string">"ArrayList After Removing Duplicate Elements :"</span>);
+
+        System.out.<span class="built_in">println</span>(listWithoutDuplicateElements);
+    }
+}`
+</code></pre><p>输出：<br>    <code>ArrayList With Duplicate Elements :[JAVA, J2EE, JSP, SERVLETS, JAVA, STRUTS, JSP]
+     ArrayList After Removing Duplicate Elements :[JAVA, J2EE, JSP, SERVLETS, STRUTS]</code></p>
+<p>这样，我们就保持了ArrayList的原有插入顺序。但是同样需要注意的一点是LinkedHashSet在迭代访问Set中的全部元素时，<br>性能比HashSet好，但是插入时性能稍微逊色于HashSet。看具体操作的时候需要那种结果。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-08-04T02:02:22.000Z"><a href="/2015/08/04/Maven知识整理/">2015-08-04</a></time>
       
       
@@ -450,7 +596,7 @@ site-deploy 发布生成的站点到服务器上
   
     <li><a href="/categories/Maven/">Maven</a><small>1</small></li>
   
-    <li><a href="/categories/java/">java</a><small>1</small></li>
+    <li><a href="/categories/java/">java</a><small>2</small></li>
   
     <li><a href="/categories/杂记/">杂记</a><small>1</small></li>
   
