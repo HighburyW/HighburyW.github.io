@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HighburyW&#39;s blog</title>
+  <title>Java动态代理机制分析 | HighburyW&#39;s blog</title>
   <meta name="author" content="wydda">
   
   <meta name="description" content="Walk steps step by step">
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="Java动态代理机制分析"/>
   <meta property="og:site_name" content="HighburyW&#39;s blog"/>
 
   
@@ -220,18 +220,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-09-24T09:54:44.264Z"><a href="/2015/09/24/Java动态代理机制分析/">2015-09-24</a></time>
+        <time datetime="2015-09-24T07:20:42.000Z"><a href="/2015/09/24/Java动态代理机制分析/">2015-09-24</a></time>
       
       
   
-    <h1 class="title"></h1>
+    <h1 class="title">Java动态代理机制分析</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>title: Java动态代理机制分析<br>date: 2015-09-24 15:20:42<br>tags:</p>
-<h2 id="categories:_java">categories: java</h2><p><strong>引言</strong></p>
+        <p><strong>引言</strong></p>
 <hr>
 <p>前几天学习Spring的AOP。其实质也是代理机制，想着更加深入的去了解一下这方面的内容。本文不是原创内容，是在原有文章上面简化抽出自己所需要的部分。如果想要了解原文，请点击<a href="http://www.codeceo.com/article/java-dynamic-proxy.html" target="_blank" rel="external">Java 动态代理机制分析及扩展</a>。</p>
 <hr>
@@ -414,13 +413,18 @@ before rent house
 <span class="function"><span class="keyword">Method</span>:</span><span class="keyword">public</span> void com.cglib.RealSubject.hello(java.lang.String)
 hello: world
 after rent house`
-</code></pre><p>最后我们的生成对象是个RealSubject的实例，而不是一个由jvm生成的代理对象。这个跟用jdk使用是有区别的。$Proxy0是因为通过 Proxy.newProxyInstance 创建的代理对象是在jvm运行时动态生成的一个对象，它并不是我们的InvocationHandler类型，也不是我们定义的那组接口的类型，而是在运行是动态生成的一个对象，并且命名方式都是这样的形式，以$开头，proxy为中，最后一个数字表示对象的标号。</p>
+</code></pre><p>最后我们的生成对象是个RealSubject的实例，而不是一个由jvm生成的代理对象。这个跟用jdk使用是有区别的。以$开头，proxy为中，最后一个数字表示对象的标号。</p>
 
       
     </div>
     <footer>
       
         
+  
+  <div class="categories">
+    <a href="/categories/java/">java</a>
+  </div>
+
         
 <!-- Baidu Button BEGIN -->
 <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
@@ -435,8 +439,10 @@ after rent house`
 
  <nav id="pagination" >
     
+    <a href="/2015/09/24/java/" class="alignleft prev" >上一页</a>
     
-    <a href="/2015/09/24/java/" class="alignright next" >下一页</a>
+    
+    <a href="/2015/08/04/Java删除ArrayList中重复的元素/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
@@ -445,7 +451,7 @@ after rent house`
 
   <section id="comments">
    <!-- 多说评论框 start -->
-<div id="ds-thread" class="ds-thread" data-thread-key="2015/09/24/Java动态代理机制分析/" data-title="" data-url="http://yoursite.com/2015/09/24/Java动态代理机制分析/"></div>
+<div id="ds-thread" class="ds-thread" data-thread-key="2015/09/24/Java动态代理机制分析/" data-title="Java动态代理机制分析" data-url="http://yoursite.com/2015/09/24/Java动态代理机制分析/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -478,7 +484,7 @@ var duoshuoQuery = {short_name:"laki"};
   
     <li><a href="/categories/Maven/">Maven</a><small>1</small></li>
   
-    <li><a href="/categories/java/">java</a><small>2</small></li>
+    <li><a href="/categories/java/">java</a><small>3</small></li>
   
   </ul>
 </div>
