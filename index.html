@@ -221,6 +221,173 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-09-24T07:20:42.000Z"><a href="/2015/09/24/Java动态代理机制分析/">2015-09-24</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/09/24/Java动态代理机制分析/">Java动态代理机制分析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Java_动态代理机制分析">Java 动态代理机制分析</h1><hr>
+<p><strong>引言</strong></p>
+<hr>
+<p>前几天学习Spring的AOP。其实质也是代理机制，想着更加深入的去了解一下这方面的内容。本文不是原创内容，是在原有文章上面简化抽出自己所需要的部分。如果想要了解原文，请点击<a href="http://www.codeceo.com/article/java-dynamic-proxy.html" target="_blank" rel="external">Java 动态代理机制分析及扩展</a>。</p>
+<hr>
+<p>首先我们先了解一下什么是代理。<img src="http://static.codeceo.com/images/2015/09/b254dc71gw1ewc64njbrgj209v06ot9b.jpg" alt="Proxy"><br>如上图所示。其实代理模式就是具体的操作让委托类去完成，而代理类负责传话，这样就避免了委托类与访问者直接的接触。从设计上得到更大的灵活性。</p>
+<hr>
+<p><strong>相关的类和接口</strong></p>
+<blockquote>
+<p>java.lang.reflect.Proxy：这是 Java 动态代理机制的主类，它提供了一组静态方法来为一组接口动态地生成代理类及其对象。</p>
+<h6 id="清单_1-_Proxy_的静态方法">清单 1. Proxy 的静态方法</h6><p>`// 方法 1: 该方法用于获取指定代理对象所关联的调用处理器<br>static InvocationHandler getInvocationHandler(Object proxy) </p>
+</blockquote>
+<p>// 方法 2：该方法用于获取关联于指定类装载器和一组接口的动态代理类的类对象<br>static Class getProxyClass(ClassLoader loader, Class[] interfaces) </p>
+<p>// 方法 3：该方法用于判断指定类对象是否是一个动态代理类<br>static boolean isProxyClass(Class cl) </p>
+<p>// 方法 4：该方法用于为指定类装载器、一组接口及调用处理器生成动态代理类实例（最常用）<br>//第一个参数是一个ClassLoader对象，定义了由哪个ClassLoader对象来对生成的代理对象进行加载；<br>//第二个参数是一个Interface对象的数组，表示的是我将要给我需要代理的对象提供一组什么接口，如果我提供了一组接口给它，那么这个代理对象就宣称实现了该接口(多态)，这样我就能调用这组接口中的方法了；<br>//第三个参数是一个InvocationHandler对象，表示的是当我这个动态代理对象在调用方法的时候，会关联到哪一个InvocationHandler对象上<br>static Object newProxyInstance(ClassLoader loader, Class[] interfaces,<br>    InvocationHandler h)`</p>
+<blockquote>
+<p>java.lang.reflect.InvocationHandler：这是调用处理器接口，它自定义了一个 invoke 方法，用于集中处理在动态代理类对象上的方法调用，通常在该方法中实现对委托类的代理访问。</p>
+<h6 id="清单_2-_InvocationHandler_的核心方法">清单 2. InvocationHandler 的核心方法</h6><p><code>// 该方法负责集中处理动态代理类上的所有方法调用。第一个参数既是代理类实例，第二个参数是被调用的方法对象
+// 第三个方法是调用参数。调用处理器根据这三个参数进行预处理或分派到委托类实例上发射执行
+Object invoke(Object proxy, Method method, Object[] args)</code><br><strong>代理机制及其特点</strong></p>
+<hr>
+<p>首先让我们来了解一下如何使用 Java 动态代理。具体有如下四步骤：<br><em>1 通过实现 InvocationHandler 接口创建自己的调用处理器；
+</em>2 通过为 Proxy 类指定 ClassLoader 对象和一组 interface 来创建动态代理类；<br><em>3 通过反射机制获得动态代理类的构造函数，其唯一参数类型是调用处理器接口类型；
+</em>4 通过构造函数创建动态代理类实例，构造时调用处理器对象作为参数被传入。<br>介绍完这个两个接口（类）之后，通过一个实例来具体看看动态代理的。</p>
+<hr>
+<p>首先我们定义一个Subject的接口。定义两个方法：<br><code>public interface Subject
+{
+public void send();
+public void hello(String str);
+}</code><br>接着我们用一个类来实现这个接口，类的名字就叫做RealSubject<br>`public class RealSubject implements Subject<br>{<br>    @Override<br>    public void rent()<br>    {<br>        System.out.println(“I want to rent my house”);<br>    }</p>
+</blockquote>
+<pre><code>@Override
+<span class="keyword">public</span> <span class="keyword">void</span> hello(<span class="keyword">String</span> <span class="built_in">str</span>)
+{
+    System.out.<span class="built_in">println</span>(<span class="string">"hello: "</span> + <span class="built_in">str</span>);
+}
+</code></pre><p>}<code>下一步，我们就要定义一个动态代理类了，前面说个，每一个动态代理类都必须要实现 InvocationHandler 这个接口，因此我们这个动态代理类也不例外：</code>public class DynamicProxy implements InvocationHandler<br>{<br>    //　这个就是我们要代理的真实对象<br>    private Object subject;</p>
+<pre><code>//    构造方法，给我们要代理的真实对象赋初值
+public <span class="type">DynamicProxy</span>(<span class="type">Object</span> subject)
+{
+    this.subject = subject;
+}
+
+@<span class="type">Override</span>
+public <span class="type">Object</span> invoke(<span class="type">Object</span> <span class="keyword">object</span>, <span class="type">Method</span> <span class="keyword">method</span>, <span class="type">Object</span>[] args)
+        throws <span class="type">Throwable</span>
+{
+    //　　在代理真实对象前我们可以添加一些自己的操作
+    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"before rent house"</span>);
+
+    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"Method:"</span> + <span class="keyword">method</span>);
+
+    //    当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用
+    <span class="keyword">method</span>.invoke(subject, args);
+
+    //　　在代理真实对象后我们也可以添加一些自己的操作
+    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"after rent house"</span>);
+
+    <span class="keyword">return</span> null;
+}
+</code></pre><p>}<code>最后再看看客户端：</code><br>public class Client<br>{<br>    public static void main(String[] args)<br>    {<br>        //    我们要代理的真实对象<br>        Subject realSubject = new RealSubject();</p>
+<pre><code>    <span class="comment">//    我们要代理哪个真实对象，就将该对象传进去，最后是通过该真实对象来调用其方法的</span>
+    InvocationHandler handler = new DynamicProxy<span class="params">(realSubject)</span>;
+
+    <span class="comment">/*
+     * 通过Proxy的newProxyInstance方法来创建我们的代理对象，我们来看看其三个参数
+     * 第一个参数 handler.getClass().getClassLoader() ，我们这里使用handler这个类的ClassLoader对象来加载我们的代理对象
+     * 第二个参数realSubject.getClass().getInterfaces()，我们这里为代理对象提供的接口是真实对象所实行的接口，表示我要代理的是该真实对象，这样我就能调用这组接口中的方法了
+     * 第三个参数handler， 我们这里将这个代理对象关联到了上方的 InvocationHandler 这个对象上
+     */</span>
+    Subject subject = <span class="params">(Subject)</span>Proxy.newProxyInstance<span class="params">(handler.getClass<span class="params">()</span>.getClassLoader<span class="params">()</span>, realSubject
+            .getClass<span class="params">()</span>.getInterfaces<span class="params">()</span>, handler)</span>;
+
+    System.out.println<span class="params">(subject.getClass<span class="params">()</span>.getName<span class="params">()</span>)</span>;
+    subject.rent<span class="params">()</span>;
+    subject.hello<span class="params">(<span class="string">"world"</span>)</span>;
+}
+</code></pre><p>}<br><code>生成结果：</code><br>$Proxy0</p>
+<p>before rent house<br>Method:public abstract void com.xiaoluo.dynamicproxy.Subject.rent()<br>I want to rent my house<br>after rent house</p>
+<p>before rent house<br>Method:public abstract void com.xiaoluo.dynamicproxy.Subject.hello(java.lang.String)<br>hello: world<br>after rent house<br>`<br>$Proxy0是因为通过 Proxy.newProxyInstance 创建的代理对象是在jvm运行时动态生成的一个对象，它并不是我们的InvocationHandler类型，也不是我们定义的那组接口的类型，而是在运行是动态生成的一个对象，并且命名方式都是这样的形式，以$开头，proxy为中，最后一个数字表示对象的标号。</p>
+<hr>
+<p>如果是没有接口呢，我们可以用cglib来实现代理。他的原理是对指定的目标类生成一个子类，并覆盖其中方法实现增强，但因为采用的是继承，所以不能对final修饰的类进行代理。<br>创建一个类：<br><code>public class RealSubject {
+    public void rent()
+    {
+        System.out.println(&quot;I want to rent my house&quot;);
+    }
+    public void hello(String str)
+    {
+        System.out.println(&quot;hello: &quot; + str);
+    }
+}</code><br>实现代理类：<br>`public class DynamicProxy implements MethodInterceptor {</p>
+<pre><code><span class="keyword">private</span> Object <span class="keyword">target</span>;  
+<span class="comment">/** 
+ * 创建代理对象 
+ *  
+ * <span class="doctag">@param</span> target 
+ * <span class="doctag">@return</span> 
+ */</span>  
+<span class="keyword">public</span> <span class="function">Object <span class="title">getInstance</span><span class="params">(Object <span class="keyword">target</span>)</span> </span>{ 
+    <span class="keyword">this</span>.<span class="keyword">target</span> = <span class="keyword">target</span>;  
+    Enhancer enhancer = <span class="keyword">new</span> Enhancer();  
+    enhancer.setSuperclass(<span class="keyword">this</span>.<span class="keyword">target</span>.getClass());  
+    <span class="comment">// 回调方法  </span>
+    enhancer.setCallback(<span class="keyword">this</span>);  
+    <span class="comment">// 创建代理对象  </span>
+    <span class="function"><span class="keyword">return</span> enhancer.<span class="title">create</span><span class="params">()</span></span>;  
+}  
+
+<span class="comment">// 回调方法  </span>
+<span class="keyword">public</span> <span class="function">Object <span class="title">intercept</span><span class="params">(Object obj, Method method, Object[] args,  
+        MethodProxy proxy)</span> <span class="keyword">throws</span> Throwable </span>{  
+    <span class="comment">//　　在代理真实对象前我们可以添加一些自己的操作</span>
+    System.out.println(<span class="string">"before rent house"</span>);
+
+    System.out.println(<span class="string">"Method:"</span> + method); 
+    proxy.invokeSuper(obj, args);  
+    <span class="comment">//　　在代理真实对象后我们也可以添加一些自己的操作</span>
+    System.out.println(<span class="string">"after rent house"</span>);
+    <span class="keyword">return</span> <span class="keyword">null</span>;  
+
+
+}  
+</code></pre><p>}<code>客户端的方法：</code><br>public class Client {<br>    public static void main(String[] args) {<br>        DynamicProxy cglib=new DynamicProxy();<br>        RealSubject bookCglib=(RealSubject)cglib.getInstance(new RealSubject());<br>        System.out.println(bookCglib.getClass().getName());<br>        bookCglib.rent();<br>        bookCglib.hello(“world”);<br>    }<br>}<br><code>生成结果：</code><br>com.cglib.RealSubject$$EnhancerByCGLIB$$799f4d5a<br>before rent house<br>Method:public void com.cglib.RealSubject.rent()<br>I want to rent my house<br>after rent house<br>before rent house<br>Method:public void com.cglib.RealSubject.hello(java.lang.String)<br>hello: world<br>after rent house<br>`<br>最后我们的生成对象是个RealSubject的实例，而不是一个由jvm生成的代理对象。这个跟用jdk使用是有区别的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-08-04T03:12:56.000Z"><a href="/2015/08/04/Java删除ArrayList中重复的元素/">2015-08-04</a></time>
       
       
@@ -519,62 +686,6 @@ site-deploy 发布生成的站点到服务器上
 
 
 
-  <article class="[page]">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-06-19T17:10:38.000Z"><a href="/2015/06/20/first/">2015-06-20</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/06/20/first/">温暖的归途</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <pre><code> 夕阳已印上你的脸
- 你轻轻敲打着皮鞭
-孩子们在风中捉迷藏
-女人使劲拍打着衣裳
- 到处都升起了炊烟
- 就像我对你的思念
-你如果还能够看得见
-会像我的心一样温暖
-星空下我思绪如烟
-离开的人还会回来
-那些岁月变成了故事
-却又变成另一个起点
-</code></pre>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -596,9 +707,7 @@ site-deploy 发布生成的站点到服务器上
   
     <li><a href="/categories/Maven/">Maven</a><small>1</small></li>
   
-    <li><a href="/categories/java/">java</a><small>2</small></li>
-  
-    <li><a href="/categories/杂记/">杂记</a><small>1</small></li>
+    <li><a href="/categories/java/">java</a><small>3</small></li>
   
   </ul>
 </div>
