@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Java动态代理机制分析 | HighburyW&#39;s blog</title>
+  <title>HighburyW&#39;s blog</title>
   <meta name="author" content="wydda">
   
   <meta name="description" content="Walk steps step by step">
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Java动态代理机制分析"/>
+  
   <meta property="og:site_name" content="HighburyW&#39;s blog"/>
 
   
@@ -220,33 +220,36 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-09-24T07:20:42.000Z"><a href="/2015/09/24/Java动态代理机制分析/">2015-09-24</a></time>
+        <time datetime="2015-09-24T09:35:16.053Z"><a href="/2015/09/24/Java动态代理机制分析/">2015-09-24</a></time>
       
       
   
-    <h1 class="title">Java动态代理机制分析</h1>
+    <h1 class="title"></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Java_动态代理机制分析">Java 动态代理机制分析</h1><hr>
-<p><strong>引言</strong></p>
+        <p>title: Java动态代理机制分析<br>date: 2015-09-24 15:20:42<br>tags:</p>
+<h2 id="categories:_java">categories: java</h2><p><strong>引言</strong></p>
 <hr>
 <p>前几天学习Spring的AOP。其实质也是代理机制，想着更加深入的去了解一下这方面的内容。本文不是原创内容，是在原有文章上面简化抽出自己所需要的部分。如果想要了解原文，请点击<a href="http://www.codeceo.com/article/java-dynamic-proxy.html" target="_blank" rel="external">Java 动态代理机制分析及扩展</a>。</p>
 <hr>
-<p>首先我们先了解一下什么是代理。<img src="http://static.codeceo.com/images/2015/09/b254dc71gw1ewc64njbrgj209v06ot9b.jpg" alt="Proxy"><br>如上图所示。其实代理模式就是具体的操作让委托类去完成，而代理类负责传话，这样就避免了委托类与访问者直接的接触。从设计上得到更大的灵活性。</p>
+<p><img src="http://static.codeceo.com/images/2015/09/b254dc71gw1ewc64njbrgj209v06ot9b.jpg" alt=""><br>首先我们先了解一下什么是代理。如上图所示。其实代理模式就是具体的操作让委托类去完成，而代理类负责传话，这样就避免了委托类与访问者直接的接触。从设计上得到更大的灵活性。</p>
 <hr>
-<p><strong>相关的类和接口</strong></p>
-<blockquote>
-<p>java.lang.reflect.Proxy：这是 Java 动态代理机制的主类，它提供了一组静态方法来为一组接口动态地生成代理类及其对象。</p>
-<h6 id="清单_1-_Proxy_的静态方法">清单 1. Proxy 的静态方法</h6><p>`// 方法 1: 该方法用于获取指定代理对象所关联的调用处理器<br>static InvocationHandler getInvocationHandler(Object proxy) </p>
-</blockquote>
-<p>// 方法 2：该方法用于获取关联于指定类装载器和一组接口的动态代理类的类对象<br>static Class getProxyClass(ClassLoader loader, Class[] interfaces) </p>
-<p>// 方法 3：该方法用于判断指定类对象是否是一个动态代理类<br>static boolean isProxyClass(Class cl) </p>
-<p>// 方法 4：该方法用于为指定类装载器、一组接口及调用处理器生成动态代理类实例（最常用）<br>//第一个参数是一个ClassLoader对象，定义了由哪个ClassLoader对象来对生成的代理对象进行加载；<br>//第二个参数是一个Interface对象的数组，表示的是我将要给我需要代理的对象提供一组什么接口，如果我提供了一组接口给它，那么这个代理对象就宣称实现了该接口(多态)，这样我就能调用这组接口中的方法了；<br>//第三个参数是一个InvocationHandler对象，表示的是当我这个动态代理对象在调用方法的时候，会关联到哪一个InvocationHandler对象上<br>static Object newProxyInstance(ClassLoader loader, Class[] interfaces,<br>    InvocationHandler h)`</p>
-<blockquote>
-<p>java.lang.reflect.InvocationHandler：这是调用处理器接口，它自定义了一个 invoke 方法，用于集中处理在动态代理类对象上的方法调用，通常在该方法中实现对委托类的代理访问。</p>
+<p><strong>相关的类和接口</strong><br><em>java.lang.reflect.Proxy：这是 Java 动态代理机制的主类，它提供了一组静态方法来为一组接口动态地生成代理类及其对象。</em></p>
+<h6 id="清单_1-_Proxy_的静态方法">清单 1. Proxy 的静态方法</h6><p><code>// 方法 1: 该方法用于获取指定代理对象所关联的调用处理器
+static InvocationHandler getInvocationHandler(Object proxy) 
+// 方法 2：该方法用于获取关联于指定类装载器和一组接口的动态代理类的类对象
+static Class getProxyClass(ClassLoader loader, Class[] interfaces) 
+// 方法 3：该方法用于判断指定类对象是否是一个动态代理类
+static boolean isProxyClass(Class cl) 
+// 方法 4：该方法用于为指定类装载器、一组接口及调用处理器生成动态代理类实例（最常用）
+//第一个参数是一个ClassLoader对象，定义了由哪个ClassLoader对象来对生成的代理对象进行加载；
+//第二个参数是一个Interface对象的数组，表示的是我将要给我需要代理的对象提供一组什么接口，如果我提供了一组接口给它，那么这个代理对象就宣称实现了该接口(多态)，这样我就能调用这组接口中的方法了；
+//第三个参数是一个InvocationHandler对象，表示的是当我这个动态代理对象在调用方法的时候，会关联到哪一个InvocationHandler对象上
+static Object newProxyInstance(ClassLoader loader, Class[] interfaces, 
+    InvocationHandler h)</code><br><em>java.lang.reflect.InvocationHandler：这是调用处理器接口，它自定义了一个 invoke 方法，用于集中处理在动态代理类对象上的方法调用，通常在该方法中实现对委托类的代理访问。</em></p>
 <h6 id="清单_2-_InvocationHandler_的核心方法">清单 2. InvocationHandler 的核心方法</h6><p><code>// 该方法负责集中处理动态代理类上的所有方法调用。第一个参数既是代理类实例，第二个参数是被调用的方法对象
 // 第三个方法是调用参数。调用处理器根据这三个参数进行预处理或分派到委托类实例上发射执行
 Object invoke(Object proxy, Method method, Object[] args)</code><br><strong>代理机制及其特点</strong></p>
@@ -260,7 +263,6 @@ Object invoke(Object proxy, Method method, Object[] args)</code><br><strong>代�
 public void send();
 public void hello(String str);
 }</code><br>接着我们用一个类来实现这个接口，类的名字就叫做RealSubject<br>`public class RealSubject implements Subject<br>{<br>    @Override<br>    public void rent()<br>    {<br>        System.out.println(“I want to rent my house”);<br>    }</p>
-</blockquote>
 <pre><code>@Override
 <span class="keyword">public</span> <span class="keyword">void</span> hello(<span class="keyword">String</span> <span class="built_in">str</span>)
 {
@@ -290,7 +292,7 @@ public <span class="type">Object</span> invoke(<span class="type">Object</span> 
 
     <span class="keyword">return</span> null;
 }
-</code></pre><p>}<code>最后再看看客户端：</code><br>public class Client<br>{<br>    public static void main(String[] args)<br>    {<br>        //    我们要代理的真实对象<br>        Subject realSubject = new RealSubject();</p>
+</code></pre><p>}<code>最后再看看客户端：</code>public class Client<br>{<br>    public static void main(String[] args)<br>    {<br>        //    我们要代理的真实对象<br>        Subject realSubject = new RealSubject();</p>
 <pre><code>    <span class="comment">//    我们要代理哪个真实对象，就将该对象传进去，最后是通过该真实对象来调用其方法的</span>
     InvocationHandler handler = new DynamicProxy<span class="params">(realSubject)</span>;
 
@@ -307,9 +309,8 @@ public <span class="type">Object</span> invoke(<span class="type">Object</span> 
     subject.rent<span class="params">()</span>;
     subject.hello<span class="params">(<span class="string">"world"</span>)</span>;
 }
-</code></pre><p>}<br><code>生成结果：</code><br>$Proxy0</p>
-<p>before rent house<br>Method:public abstract void com.xiaoluo.dynamicproxy.Subject.rent()<br>I want to rent my house<br>after rent house</p>
-<p>before rent house<br>Method:public abstract void com.xiaoluo.dynamicproxy.Subject.hello(java.lang.String)<br>hello: world<br>after rent house<br>`<br>$Proxy0是因为通过 Proxy.newProxyInstance 创建的代理对象是在jvm运行时动态生成的一个对象，它并不是我们的InvocationHandler类型，也不是我们定义的那组接口的类型，而是在运行是动态生成的一个对象，并且命名方式都是这样的形式，以$开头，proxy为中，最后一个数字表示对象的标号。</p>
+</code></pre><p>}<code>生成结果：</code>$Proxy0<br>before rent house<br>Method:public abstract void com.xiaoluo.dynamicproxy.Subject.rent()<br>I want to rent my house<br>after rent house</p>
+<p>before rent house<br>Method:public abstract void com.xiaoluo.dynamicproxy.Subject.hello(java.lang.String)<br>hello: world<br>after rent house`<br>$Proxy0是因为通过 Proxy.newProxyInstance 创建的代理对象是在jvm运行时动态生成的一个对象，<br>它并不是我们的InvocationHandler类型，也不是我们定义的那组接口的类型，而是在运行是动态生成<br>的一个对象，<br>并且命名方式都是这样的形式，以$开头，proxy为中，最后一个数字表示对象的标号。</p>
 <hr>
 <p>如果是没有接口呢，我们可以用cglib来实现代理。他的原理是对指定的目标类生成一个子类，并覆盖其中方法实现增强，但因为采用的是继承，所以不能对final修饰的类进行代理。<br>创建一个类：<br><code>public class RealSubject {
     public void rent()
@@ -352,18 +353,13 @@ public <span class="type">Object</span> invoke(<span class="type">Object</span> 
 
 
 }  
-</code></pre><p>}<code>客户端的方法：</code><br>public class Client {<br>    public static void main(String[] args) {<br>        DynamicProxy cglib=new DynamicProxy();<br>        RealSubject bookCglib=(RealSubject)cglib.getInstance(new RealSubject());<br>        System.out.println(bookCglib.getClass().getName());<br>        bookCglib.rent();<br>        bookCglib.hello(“world”);<br>    }<br>}<br><code>生成结果：</code><br>com.cglib.RealSubject$$EnhancerByCGLIB$$799f4d5a<br>before rent house<br>Method:public void com.cglib.RealSubject.rent()<br>I want to rent my house<br>after rent house<br>before rent house<br>Method:public void com.cglib.RealSubject.hello(java.lang.String)<br>hello: world<br>after rent house<br>`<br>最后我们的生成对象是个RealSubject的实例，而不是一个由jvm生成的代理对象。这个跟用jdk使用是有区别的。</p>
+</code></pre><p>}<code>客户端的方法：</code>public class Client {<br>    public static void main(String[] args) {<br>        DynamicProxy cglib=new DynamicProxy();<br>        RealSubject bookCglib=(RealSubject)cglib.getInstance(new RealSubject());<br>        System.out.println(bookCglib.getClass().getName());<br>        bookCglib.rent();<br>        bookCglib.hello(“world”);<br>    }<br>}<code>生成结果：</code>com.cglib.RealSubject$$EnhancerByCGLIB$$799f4d5a<br>before rent house<br>Method:public void com.cglib.RealSubject.rent()<br>I want to rent my house<br>after rent house<br>before rent house<br>Method:public void com.cglib.RealSubject.hello(java.lang.String)<br>hello: world<br>after rent house`<br>最后我们的生成对象是个RealSubject的实例，而不是一个由jvm生成的代理对象。这个跟用jdk使用是有区别的。</p>
 
       
     </div>
     <footer>
       
         
-  
-  <div class="categories">
-    <a href="/categories/java/">java</a>
-  </div>
-
         
 <!-- Baidu Button BEGIN -->
 <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
@@ -388,7 +384,7 @@ public <span class="type">Object</span> invoke(<span class="type">Object</span> 
 
   <section id="comments">
    <!-- 多说评论框 start -->
-<div id="ds-thread" class="ds-thread" data-thread-key="2015/09/24/Java动态代理机制分析/" data-title="Java动态代理机制分析" data-url="http://yoursite.com/2015/09/24/Java动态代理机制分析/"></div>
+<div id="ds-thread" class="ds-thread" data-thread-key="2015/09/24/Java动态代理机制分析/" data-title="" data-url="http://yoursite.com/2015/09/24/Java动态代理机制分析/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -421,7 +417,7 @@ var duoshuoQuery = {short_name:"laki"};
   
     <li><a href="/categories/Maven/">Maven</a><small>1</small></li>
   
-    <li><a href="/categories/java/">java</a><small>3</small></li>
+    <li><a href="/categories/java/">java</a><small>2</small></li>
   
   </ul>
 </div>
