@@ -221,7 +221,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-09-24T09:37:46.651Z"><a href="/2015/09/24/Java动态代理机制分析/">2015-09-24</a></time>
+        <time datetime="2015-09-24T09:38:55.926Z"><a href="/2015/09/24/Java动态代理机制分析/">2015-09-24</a></time>
       
       
   
@@ -260,11 +260,13 @@ Object invoke(Object proxy, <span class="function"><span class="keyword">Method<
 </em>2 通过为 Proxy 类指定 ClassLoader 对象和一组 interface 来创建动态代理类；<br><em>3 通过反射机制获得动态代理类的构造函数，其唯一参数类型是调用处理器接口类型；
 </em>4 通过构造函数创建动态代理类实例，构造时调用处理器对象作为参数被传入。<br>介绍完这个两个接口（类）之后，通过一个实例来具体看看动态代理的。</p>
 <hr>
-<p>首先我们定义一个Subject的接口。定义两个方法：<br>        <code>public interface Subject
-        {
-        public void send();
-        public void hello(String str);
-        }</code><br>接着我们用一个类来实现这个接口，类的名字就叫做RealSubject<br>        `public class RealSubject implements Subject<br>        {<br>            @Override<br>            public void rent()<br>            {<br>                System.out.println(“I want to rent my house”);<br>            }</p>
+<p>首先我们定义一个Subject的接口。定义两个方法：</p>
+<pre><code>`<span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">Subject</span>
+{
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">send</span>(<span class="params"></span>)</span>;
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span>(<span class="params">String str</span>)</span>;
+}`
+</code></pre><p>接着我们用一个类来实现这个接口，类的名字就叫做RealSubject<br>        `public class RealSubject implements Subject<br>        {<br>            @Override<br>            public void rent()<br>            {<br>                System.out.println(“I want to rent my house”);<br>            }</p>
 <pre><code>    @Override
     <span class="keyword">public</span> <span class="keyword">void</span> hello(<span class="keyword">String</span> <span class="built_in">str</span>)
     {
