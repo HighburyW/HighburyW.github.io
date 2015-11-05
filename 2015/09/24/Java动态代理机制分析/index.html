@@ -53,32 +53,35 @@
 
 
 
-<meta name="description" content="title: Java动态代理机制分析date: 2015-09-24 15:20:42tags:
-categories: java引言
+<meta name="description" content="引言
 
 前几天学习Spring的AOP。其实质也是代理机制，想着更加深入的去了解一下这方面的内容。本文不是原创内容，是在原有文章上面简化抽出自己所需要的部分。如果想要了解原文，请点击Java 动态代理机制分析及扩展。
 
-首先我们先了解一下什么是代理。如上图所示。其实代">
+首先我们先了解一下什么是代理。如上图所示。其实代理模式就是具体的操作让委托类去完成，而代理类负责传话，这样就避免了委托类与访问者直接的接触。从设计上得到更大的灵活性。
+
+相关的类和">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HighburyW's blog">
-<meta property="og:url" content="http://yoursite.com/2015/11/05/Java动态代理机制分析/index.html">
+<meta property="og:title" content="Java动态代理机制分析">
+<meta property="og:url" content="http://yoursite.com/2015/09/24/Java动态代理机制分析/index.html">
 <meta property="og:site_name" content="HighburyW's blog">
-<meta property="og:description" content="title: Java动态代理机制分析date: 2015-09-24 15:20:42tags:
-categories: java引言
+<meta property="og:description" content="引言
 
 前几天学习Spring的AOP。其实质也是代理机制，想着更加深入的去了解一下这方面的内容。本文不是原创内容，是在原有文章上面简化抽出自己所需要的部分。如果想要了解原文，请点击Java 动态代理机制分析及扩展。
 
-首先我们先了解一下什么是代理。如上图所示。其实代">
+首先我们先了解一下什么是代理。如上图所示。其实代理模式就是具体的操作让委托类去完成，而代理类负责传话，这样就避免了委托类与访问者直接的接触。从设计上得到更大的灵活性。
+
+相关的类和">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/09/b254dc71gw1ewc64njbrgj209v06ot9b.jpg">
-<meta property="og:updated_time" content="2015-09-24T09:54:01.735Z">
+<meta property="og:updated_time" content="2015-11-05T14:57:29.308Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HighburyW's blog">
-<meta name="twitter:description" content="title: Java动态代理机制分析date: 2015-09-24 15:20:42tags:
-categories: java引言
+<meta name="twitter:title" content="Java动态代理机制分析">
+<meta name="twitter:description" content="引言
 
 前几天学习Spring的AOP。其实质也是代理机制，想着更加深入的去了解一下这方面的内容。本文不是原创内容，是在原有文章上面简化抽出自己所需要的部分。如果想要了解原文，请点击Java 动态代理机制分析及扩展。
 
-首先我们先了解一下什么是代理。如上图所示。其实代">
+首先我们先了解一下什么是代理。如上图所示。其实代理模式就是具体的操作让委托类去完成，而代理类负责传话，这样就避免了委托类与访问者直接的接触。从设计上得到更大的灵活性。
+
+相关的类和">
 
 
 
@@ -90,7 +93,7 @@ categories: java引言
   };
 </script>
 
-  <title>  | HighburyW's blog </title>
+  <title> Java动态代理机制分析 | HighburyW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -230,7 +233,7 @@ categories: java引言
             
             
               
-                
+                Java动态代理机制分析
               
             
           </h1>
@@ -239,11 +242,26 @@ categories: java引言
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-11-05T22:55:04+08:00" content="2015-11-05">
-              2015-11-05
+            <time itemprop="dateCreated" datetime="2015-09-24T15:20:42+08:00" content="2015-09-24">
+              2015-09-24
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -263,8 +281,7 @@ categories: java引言
       
 
       
-        <span itemprop="articleBody"><p>title: Java动态代理机制分析<br>date: 2015-09-24 15:20:42<br>tags:</p>
-<h2 id="categories:_java">categories: java</h2><p><strong>引言</strong></p>
+        <span itemprop="articleBody"><p><strong>引言</strong></p>
 <hr>
 <p>前几天学习Spring的AOP。其实质也是代理机制，想着更加深入的去了解一下这方面的内容。本文不是原创内容，是在原有文章上面简化抽出自己所需要的部分。如果想要了解原文，请点击<a href="http://www.codeceo.com/article/java-dynamic-proxy.html" target="_blank" rel="external">Java 动态代理机制分析及扩展</a>。</p>
 <hr>
@@ -621,7 +638,7 @@ var duoshuoQuery = {short_name:"laki"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#categories:_java"><span class="nav-number">1.</span> <span class="nav-text">categories: java</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#清单_1-_Proxy_的静态方法"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">清单 1. Proxy 的静态方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#清单_2-_InvocationHandler_的核心方法"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">清单 2. InvocationHandler 的核心方法</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#清单_1-_Proxy_的静态方法"><span class="nav-number">1.</span> <span class="nav-text">清单 1. Proxy 的静态方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#清单_2-_InvocationHandler_的核心方法"><span class="nav-number">2.</span> <span class="nav-text">清单 2. InvocationHandler 的核心方法</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
