@@ -222,6 +222,102 @@
             
               
                 
+                <a class="post-title-link" href="/2015/11/05/实施部署/" itemprop="url">
+                  实施部署
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-11-05T23:02:11+08:00" content="2015-11-05">
+              2015-11-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>在部署系统的时候，oracle是在集群上面。所以我们原先用使用sid来配置jdbcurl已经不行了，会导致服务启动不起来，因为对于集群来讲，每一个节点的sid都是不一样的。所以我们将原先的格式修改为集群下的配置，将sid来替换为service_name ，service_name 包含所有的节点。<br>原来的配置：<br><code>&lt;Set name=&quot;jdbcUrl&quot;&gt;jdbc:oracle:thin:@172.16.2.69:1521:ahltollglc&lt;/Set&gt;</code><br>修改为：<br><code>&lt;Set name=&quot;jdbcUrl&quot;&gt;jdbc:oracle:thin:@//172.16.2.69:1521/ahltollglc&lt;/Set&gt;</code><br>注：@ 后面加上//这是与使用sid的主要区别。<br>其实oracle连接java jdbc/ojdbc 驱动的方式一共有三种。第一种是Oracle Thin JDBC Driver，第二种是Oracle OCI JDBC Driver，第三种是Oracle 8i OCI JDBC Driver 。上面说的那两种配置的方式其实都是使用的Oracel Thin JDBC Driver这种驱动的方式，这种还有一种形式就是用数据库的TNSName来配置，如：<br><code>jdbc:oracle:thin:@TNSName</code><br>注：TNSName是本地的名称，这种方式我没有进行配置，因为这是本地命名服务配置的。估计远程的话这种方式应该是连接不上的，但是没有经过测试。<br>像Oracle OCI JDBC Driver这种方式配置url的方式为：<br><code>jdbc:oracle:oci:@port/service_name</code><br>//或者<br>jdbc:oracle:oci:@port:sid<br>oci这种形式是一种胖客户端的连接方式，而thin是一种瘦客户端的形式。用oci的话需要本地安装oracle的客户端，thin的话就不需要，所以大多数都是用的thin这种连接方式。最后还有一种是8i OCI这种驱动连接的方式，配置的方式为：<br><code>jdbc:oracle:oci8:@TNSName</code><br>这种需要引进classes12.zip这个文件。<br>以上就是在工作中总结的oracle的几种连接的方式。推荐的还是用service_name这种形式，官方现在也是推荐用这种形式，不再用sid这种去配置url。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/09/24/Java动态代理机制分析/" itemprop="url">
                   Java动态代理机制分析
                 </a>
@@ -948,106 +1044,14 @@ site-deploy 发布生成的站点到服务器上
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/05/杂七杂八/" itemprop="url">
-                  杂七杂八（一）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-05-05T22:03:44+08:00" content="2015-05-05">
-              2015-05-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂七杂八/" itemprop="url" rel="index">
-                    <span itemprop="name">杂七杂八</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>　　今年公司提出每天多少要写点代码分析，以及每周五进行代码分享。这个建议不错，知识那么多，好记性不如烂笔头，每天记录些还是很有好处的。自己也写了很多篇代码分析了，都是自己在平时工作学习中总结或者解决的一些知识。我的初衷还是想写点真正有质量的，网上不是随地可见的知识分享给大家的。但是由于自己身上的惰性，很多东西领悟了但是没有很好的记录下来，也没有很好的巩固，所以有些比较难的地方，说的不是很透彻。我是相当愿意将知识很通俗的解释给别人听的，比如有时候测试的同事就会问一些web应用配置上面的问题，因为有些是设置spring的一些知识，所以要给人讲明白讲清楚，这样就会用一些通俗的语言去解释这些东西。所以知道再讲出来，再到讲出来大家都能理解。这是一个锻炼自己的过程。还有一些知识是自己没有学习过的，在平时的工作中也没有遇到过，写出来的话，能够抛砖引玉，让别的同事来指导一下，请教会这种知识的人，也未尝不是一件乐趣啊。<br>　　所以，要多写写，写出来给大家看，文章中有不对的地方也能按照别人的建议修改，及时纠正错误。这是一种相互学习的过程。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
         </div>
@@ -1086,7 +1090,7 @@ site-deploy 发布生成的站点到服务器上
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1100,7 +1104,7 @@ site-deploy 发布生成的站点到服务器上
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

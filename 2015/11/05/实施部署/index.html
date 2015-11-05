@@ -37,7 +37,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="学习," />
 
 
 
@@ -53,19 +53,16 @@
 
 
 
-<meta name="description" content="Java中的网络支持根据网络的不同层次，Java提供的网络功能有四大类1.InetAddress :用于标识网络上的硬件资源。2.URL :统一资源定位符 通过URL可以直接读取或者写入网络上面的数据。3.Sockets :使用TCP协议实现网络通信的Scoket相关的类。4.Datagram :使用UDP协议 将数据保存在数据报文中 通过网络进行通信。
-InetAddress类InetAddre">
+<meta name="description" content="在部署系统的时候，oracle是在集群上面。所以我们原先用使用sid来配置jdbcurl已经不行了，会导致服务启动不起来，因为对于集群来讲，每一个节点的sid都是不一样的。所以我们将原先的格式修改为集群下的配置，将sid来替换为service_name ，service_name 包含所有的节点。原来的配置：&amp;lt;Set name=&amp;quot;jdbcUrl&amp;quot;&amp;gt;jdbc:orac">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Socket应用">
-<meta property="og:url" content="http://yoursite.com/2015/07/26/Socket应用/index.html">
+<meta property="og:title" content="实施部署">
+<meta property="og:url" content="http://yoursite.com/2015/11/05/实施部署/index.html">
 <meta property="og:site_name" content="HighburyW's blog">
-<meta property="og:description" content="Java中的网络支持根据网络的不同层次，Java提供的网络功能有四大类1.InetAddress :用于标识网络上的硬件资源。2.URL :统一资源定位符 通过URL可以直接读取或者写入网络上面的数据。3.Sockets :使用TCP协议实现网络通信的Scoket相关的类。4.Datagram :使用UDP协议 将数据保存在数据报文中 通过网络进行通信。
-InetAddress类InetAddre">
-<meta property="og:updated_time" content="2015-07-26T15:09:31.170Z">
+<meta property="og:description" content="在部署系统的时候，oracle是在集群上面。所以我们原先用使用sid来配置jdbcurl已经不行了，会导致服务启动不起来，因为对于集群来讲，每一个节点的sid都是不一样的。所以我们将原先的格式修改为集群下的配置，将sid来替换为service_name ，service_name 包含所有的节点。原来的配置：&amp;lt;Set name=&amp;quot;jdbcUrl&amp;quot;&amp;gt;jdbc:orac">
+<meta property="og:updated_time" content="2015-11-05T15:05:35.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Socket应用">
-<meta name="twitter:description" content="Java中的网络支持根据网络的不同层次，Java提供的网络功能有四大类1.InetAddress :用于标识网络上的硬件资源。2.URL :统一资源定位符 通过URL可以直接读取或者写入网络上面的数据。3.Sockets :使用TCP协议实现网络通信的Scoket相关的类。4.Datagram :使用UDP协议 将数据保存在数据报文中 通过网络进行通信。
-InetAddress类InetAddre">
+<meta name="twitter:title" content="实施部署">
+<meta name="twitter:description" content="在部署系统的时候，oracle是在集群上面。所以我们原先用使用sid来配置jdbcurl已经不行了，会导致服务启动不起来，因为对于集群来讲，每一个节点的sid都是不一样的。所以我们将原先的格式修改为集群下的配置，将sid来替换为service_name ，service_name 包含所有的节点。原来的配置：&amp;lt;Set name=&amp;quot;jdbcUrl&amp;quot;&amp;gt;jdbc:orac">
 
 
 
@@ -77,7 +74,7 @@ InetAddress类InetAddre">
   };
 </script>
 
-  <title> Socket应用 | HighburyW's blog </title>
+  <title> 实施部署 | HighburyW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -217,7 +214,7 @@ InetAddress类InetAddre">
             
             
               
-                Socket应用
+                实施部署
               
             
           </h1>
@@ -226,8 +223,8 @@ InetAddress类InetAddre">
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-07-26T18:32:54+08:00" content="2015-07-26">
-              2015-07-26
+            <time itemprop="dateCreated" datetime="2015-11-05T23:02:11+08:00" content="2015-11-05">
+              2015-11-05
             </time>
           </span>
 
@@ -265,31 +262,31 @@ InetAddress类InetAddre">
       
 
       
-        <span itemprop="articleBody"><h1 id="Java中的网络支持">Java中的网络支持</h1><h2 id="根据网络的不同层次，Java提供的网络功能有四大类">根据网络的不同层次，Java提供的网络功能有四大类</h2><p>1.InetAddress :用于标识网络上的硬件资源。<br>2.URL :统一资源定位符 通过URL可以直接读取或者写入网络上面的数据。<br>3.Sockets :使用TCP协议实现网络通信的Scoket相关的类。<br>4.Datagram :使用UDP协议 将数据保存在数据报文中 通过网络进行通信。</p>
-<h3 id="InetAddress类">InetAddress类</h3><p>InetAddress没有构造方法，所以我们不能直接new出一个对象。但是api上面可以看出，InetAddress<br>有很多的静态方法，返回的实例就是InetAddress的。通过InetAddress的实例，我们可以得到计算机名，<br>IP地址等。</p>
-<h3 id="URL">URL</h3><p>URL由两部分构成，协议名称和资源名称，中间用冒号隔开。java中获得URL的实例可以通过构造方法去new<br>出来。</p>
+        <span itemprop="articleBody"><p>在部署系统的时候，oracle是在集群上面。所以我们原先用使用sid来配置jdbcurl已经不行了，会导致服务启动不起来，因为对于集群来讲，每一个节点的sid都是不一样的。所以我们将原先的格式修改为集群下的配置，将sid来替换为service_name ，service_name 包含所有的节点。<br>原来的配置：<br><code>&lt;Set name=&quot;jdbcUrl&quot;&gt;jdbc:oracle:thin:@172.16.2.69:1521:ahltollglc&lt;/Set&gt;</code><br>修改为：<br><code>&lt;Set name=&quot;jdbcUrl&quot;&gt;jdbc:oracle:thin:@//172.16.2.69:1521/ahltollglc&lt;/Set&gt;</code><br>注：@ 后面加上//这是与使用sid的主要区别。<br>其实oracle连接java jdbc/ojdbc 驱动的方式一共有三种。第一种是Oracle Thin JDBC Driver，第二种是Oracle OCI JDBC Driver，第三种是Oracle 8i OCI JDBC Driver 。上面说的那两种配置的方式其实都是使用的Oracel Thin JDBC Driver这种驱动的方式，这种还有一种形式就是用数据库的TNSName来配置，如：<br><code>jdbc:oracle:thin:@TNSName</code><br>注：TNSName是本地的名称，这种方式我没有进行配置，因为这是本地命名服务配置的。估计远程的话这种方式应该是连接不上的，但是没有经过测试。<br>像Oracle OCI JDBC Driver这种方式配置url的方式为：<br><code>jdbc:oracle:oci:@port/service_name</code><br>//或者<br>jdbc:oracle:oci:@port:sid<br>oci这种形式是一种胖客户端的连接方式，而thin是一种瘦客户端的形式。用oci的话需要本地安装oracle的客户端，thin的话就不需要，所以大多数都是用的thin这种连接方式。最后还有一种是8i OCI这种驱动连接的方式，配置的方式为：<br><code>jdbc:oracle:oci8:@TNSName</code><br>这种需要引进classes12.zip这个文件。<br>以上就是在工作中总结的oracle的几种连接的方式。推荐的还是用service_name这种形式，官方现在也是推荐用这种形式，不再用sid这种去配置url。</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/学习/" rel="tag">#学习</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/05/05/杂七杂八/" rel="next" title="杂七杂八（一）">
-                <i class="fa fa-chevron-left"></i> 杂七杂八（一）
+              <a href="/2015/09/24/Java动态代理机制分析/" rel="next" title="Java动态代理机制分析">
+                <i class="fa fa-chevron-left"></i> Java动态代理机制分析
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/08/04/Maven知识整理/" rel="prev" title="Maven知识整理">
-                Maven知识整理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -443,7 +440,7 @@ var duoshuoQuery = {short_name:"laki"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的网络支持"><span class="nav-number">1.</span> <span class="nav-text">Java中的网络支持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#根据网络的不同层次，Java提供的网络功能有四大类"><span class="nav-number">1.1.</span> <span class="nav-text">根据网络的不同层次，Java提供的网络功能有四大类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InetAddress类"><span class="nav-number">1.1.1.</span> <span class="nav-text">InetAddress类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL"><span class="nav-number">1.1.2.</span> <span class="nav-text">URL</span></a></li></ol></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目錄</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
