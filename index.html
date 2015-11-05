@@ -222,6 +222,110 @@
             
               
                 
+                <a class="post-title-link" href="/2015/11/05/jndi多数据源配置/" itemprop="url">
+                  jndi多数据源配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-11-05T23:12:29+08:00" content="2015-11-05">
+              2015-11-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>今天早上跟领导讨论下关于报表服务启动一个，同时由稽查和收费两个系统访问的问题。这样就省的再启动一个多余的report服务，节省了服务器资源。所以我用中午的时间做了一下测试，验证了一下。其实这个主要的问题还是在于是否支持多数据源，因为稽查和收费不在同一个数据库中。查看下fineReport的api，这个工具是能够同时支持多个数据源的。然后再看spring,spring对多数据源也能够很好的支持。所以问题就迎刃而解了。下面是测试的步骤：<br>1.配置applicationContext.xml。<br>`<!-- 收费-->   </p>
+<p><bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"><br>        <property name="resourceRef"><br>            <value>true</value><br>        </property><br>        <property name="jndiName"><br>            <value>jdbc/toll</value><br>        </property><br>    </bean><br><!-- 稽查--><br>        <bean id="auditDataSource" class="org.springframework.jndi.JndiObjectFactoryBean"><br>        <property name="resourceRef"><br>            <value>true</value><br>        </property><br>        <property name="jndiName"><br>            <value>jdbc/audit</value><br>        </property><br>    </bean><code>这里面report项目中并不需要jdbctemper之类的，所以不需要来引用datasource。如果在别的项目中的话，需要重写下AbstractRoutingDataSource的determineCurrentLookupKey方法来获得不同的数据源。这个类的父类AbstractDataSource是spring获得数据源的类。今天只是测试report的服务，所以没再继续看这块。
+2.配置jndi</code><new id="toll" class="org.eclipse.jetty.plus.jndi.Resource"><br>        <arg>jdbc/toll</arg><br>        <arg>  <new class="com.mchange.v2.c3p0.ComboPooledDataSource"><br>                <set name="driverClass">oracle.jdbc.driver.OracleDriver</set><br>                <set name="jdbcUrl">jdbc:oracle:thin:@172.16.2.69:1521:ahltollglc</set><br>             <!--    <Set name="jdbcUrl">jdbc:oracle:thin:@//172.24.1.5:1521/ahltoll</Set>   --><br>                <set name="user">dbuser1</set><br>                <set name="password">wtkjdb1</set><br>                </new><br>                <!--  <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+                <Set name="jdbcUrl">jdbc:oracle:thin:@192.162.123.223:1521:TollOffice</Set>
+                <Set name="driverClass">oracle.jdbc.driver.OracleDriver</Set>
+                <Set name="user">tolloffice</Set>
+                <Set name="password">tolloffice</Set>
+                </New>  --><br>        </arg><br>    </new><br>    <new id="audit" class="org.eclipse.jetty.plus.jndi.Resource"><br>        <arg>jdbc/audit</arg><br>        <arg><br>             <new class="com.mchange.v2.c3p0.ComboPooledDataSource"><br>                <set name="driverClass">oracle.jdbc.driver.OracleDriver</set><br>                <set name="jdbcUrl">jdbc:oracle:thin:@172.16.2.69:1521:ahltolljc</set><br>                <set name="user">dbuser2</set><br>                <set name="password">wtkjdb2</set><br>            </new><br>        </arg><br>    </new>`<br>3.修改报表模板中的数据源名字<br>这里只需要切换一下，在报表模板文件中的datasource的名字。如我们将稽查的数据源的名字定义为auditDataSource。然后只需要将模板中的DatabaseName改为这个名字即可。如：</p>
+<p><databasename>&lt;![CDATA[auditDataSource]]&gt;</databasename><br>修改DatabaseName节点，将模板中的节点名字依次替换。<br>然后测试了一下，只启动一个report服务，用稽查和收费同时调用，都能够正确的显示报表。所以以后实施部署的时候，稽查和收费完全可以只部署一个report服务，既省了工作量，又节省了服务器资源。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/11/05/实施部署/" itemprop="url">
                   实施部署
                 </a>
@@ -946,104 +1050,6 @@ site-deploy 发布生成的站点到服务器上
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/26/Socket应用/" itemprop="url">
-                  Socket应用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-07-26T18:32:54+08:00" content="2015-07-26">
-              2015-07-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="Java中的网络支持">Java中的网络支持</h1><h2 id="根据网络的不同层次，Java提供的网络功能有四大类">根据网络的不同层次，Java提供的网络功能有四大类</h2><p>1.InetAddress :用于标识网络上的硬件资源。<br>2.URL :统一资源定位符 通过URL可以直接读取或者写入网络上面的数据。<br>3.Sockets :使用TCP协议实现网络通信的Scoket相关的类。<br>4.Datagram :使用UDP协议 将数据保存在数据报文中 通过网络进行通信。</p>
-<h3 id="InetAddress类">InetAddress类</h3><p>InetAddress没有构造方法，所以我们不能直接new出一个对象。但是api上面可以看出，InetAddress<br>有很多的静态方法，返回的实例就是InetAddress的。通过InetAddress的实例，我们可以得到计算机名，<br>IP地址等。</p>
-<h3 id="URL">URL</h3><p>URL由两部分构成，协议名称和资源名称，中间用冒号隔开。java中获得URL的实例可以通过构造方法去new<br>出来。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1090,7 +1096,7 @@ site-deploy 发布生成的站点到服务器上
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
