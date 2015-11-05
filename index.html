@@ -133,7 +133,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            歸檔
+            归档
           </a>
         </li>
       
@@ -143,7 +143,7 @@
             
               <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
             
-            關於
+            关于
           </a>
         </li>
       
@@ -153,7 +153,7 @@
             
               <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
-            分類
+            分类
           </a>
         </li>
       
@@ -163,7 +163,7 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            標籤
+            标签
           </a>
         </li>
       
@@ -232,7 +232,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            发表于
             <time itemprop="dateCreated" datetime="2015-11-05T23:12:29+08:00" content="2015-11-05">
               2015-11-05
             </time>
@@ -240,7 +240,7 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
@@ -275,15 +275,14 @@
         
           <span itemprop="articleBody">
             
-              <p>今天早上跟领导讨论下关于报表服务启动一个，同时由稽查和收费两个系统访问的问题。这样就省的再启动一个多余的report服务，节省了服务器资源。所以我用中午的时间做了一下测试，验证了一下。其实这个主要的问题还是在于是否支持多数据源，因为稽查和收费不在同一个数据库中。查看下fineReport的api，这个工具是能够同时支持多个数据源的。然后再看spring,spring对多数据源也能够很好的支持。所以问题就迎刃而解了。下面是测试的步骤：<br>1.配置applicationContext.xml。<br>`<!-- 收费-->   </p>
-<p><bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"><br>        <property name="resourceRef"><br>            <value>true</value><br>        </property><br>        <property name="jndiName"><br>            <value>jdbc/toll</value><br>        </property><br>    </bean><br><!-- 稽查--><br>        <bean id="auditDataSource" class="org.springframework.jndi.JndiObjectFactoryBean"><br>        <property name="resourceRef"><br>            <value>true</value><br>        </property><br>        <property name="jndiName"><br>            <value>jdbc/audit</value><br>        </property><br>    </bean><code>这里面report项目中并不需要jdbctemper之类的，所以不需要来引用datasource。如果在别的项目中的话，需要重写下AbstractRoutingDataSource的determineCurrentLookupKey方法来获得不同的数据源。这个类的父类AbstractDataSource是spring获得数据源的类。今天只是测试report的服务，所以没再继续看这块。
-2.配置jndi</code><new id="toll" class="org.eclipse.jetty.plus.jndi.Resource"><br>        <arg>jdbc/toll</arg><br>        <arg>  <new class="com.mchange.v2.c3p0.ComboPooledDataSource"><br>                <set name="driverClass">oracle.jdbc.driver.OracleDriver</set><br>                <set name="jdbcUrl">jdbc:oracle:thin:@172.16.2.69:1521:ahltollglc</set><br>             <!--    <Set name="jdbcUrl">jdbc:oracle:thin:@//172.24.1.5:1521/ahltoll</Set>   --><br>                <set name="user">dbuser1</set><br>                <set name="password">wtkjdb1</set><br>                </new><br>                <!--  <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+              <p>今天早上跟领导讨论下关于报表服务启动一个，同时由稽查和收费两个系统访问的问题。这样就省的再启动一个多余的report服务，节省了服务器资源。所以我用中午的时间做了一下测试，验证了一下。其实这个主要的问题还是在于是否支持多数据源，因为稽查和收费不在同一个数据库中。查看下fineReport的api，这个工具是能够同时支持多个数据源的。然后再看spring,spring对多数据源也能够很好的支持。所以问题就迎刃而解了。下面是测试的步骤：<br>1.配置applicationContext.xml。<br><!-- 收费-->   </p>
+<p><bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"><br>        <property name="resourceRef"><br>            <value>true</value><br>        </property><br>        <property name="jndiName"><br>            <value>jdbc/toll</value><br>        </property><br>    </bean><br><!-- 稽查--><br>        <bean id="auditDataSource" class="org.springframework.jndi.JndiObjectFactoryBean"><br>        <property name="resourceRef"><br>            <value>true</value><br>        </property><br>        <property name="jndiName"><br>            <value>jdbc/audit</value><br>        </property><br>    </bean><br>这里面report项目中并不需要jdbctemper之类的，所以不需要来引用datasource。如果在别的项目中的话，需要重写下AbstractRoutingDataSource的determineCurrentLookupKey方法来获得不同的数据源。这个类的父类AbstractDataSource是spring获得数据源的类。今天只是测试report的服务，所以没再继续看这块。<br>2.配置jndi</p>
+<p><new id="toll" class="org.eclipse.jetty.plus.jndi.Resource"><br>        <arg>jdbc/toll</arg><br>        <arg>  <new class="com.mchange.v2.c3p0.ComboPooledDataSource"><br>                <set name="driverClass">oracle.jdbc.driver.OracleDriver</set><br>                <set name="jdbcUrl">jdbc:oracle:thin:@172.16.2.69:1521:ahltollglc</set><br>             <!--    <Set name="jdbcUrl">jdbc:oracle:thin:@//172.24.1.5:1521/ahltoll</Set>   --><br>                <set name="user">dbuser1</set><br>                <set name="password">wtkjdb1</set><br>                </new><br>                <!--  <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
                 <Set name="jdbcUrl">jdbc:oracle:thin:@192.162.123.223:1521:TollOffice</Set>
                 <Set name="driverClass">oracle.jdbc.driver.OracleDriver</Set>
                 <Set name="user">tolloffice</Set>
                 <Set name="password">tolloffice</Set>
-                </New>  --><br>        </arg><br>    </new><br>    <new id="audit" class="org.eclipse.jetty.plus.jndi.Resource"><br>        <arg>jdbc/audit</arg><br>        <arg><br>             <new class="com.mchange.v2.c3p0.ComboPooledDataSource"><br>                <set name="driverClass">oracle.jdbc.driver.OracleDriver</set><br>                <set name="jdbcUrl">jdbc:oracle:thin:@172.16.2.69:1521:ahltolljc</set><br>                <set name="user">dbuser2</set><br>                <set name="password">wtkjdb2</set><br>            </new><br>        </arg><br>    </new>`<br>3.修改报表模板中的数据源名字<br>这里只需要切换一下，在报表模板文件中的datasource的名字。如我们将稽查的数据源的名字定义为auditDataSource。然后只需要将模板中的DatabaseName改为这个名字即可。如：</p>
-<p><databasename>&lt;![CDATA[auditDataSource]]&gt;</databasename><br>修改DatabaseName节点，将模板中的节点名字依次替换。<br>然后测试了一下，只启动一个report服务，用稽查和收费同时调用，都能够正确的显示报表。所以以后实施部署的时候，稽查和收费完全可以只部署一个report服务，既省了工作量，又节省了服务器资源。</p>
+                </New>  --><br>        </arg><br>    </new><br>    <new id="audit" class="org.eclipse.jetty.plus.jndi.Resource"><br>        <arg>jdbc/audit</arg><br>        <arg><br>             <new class="com.mchange.v2.c3p0.ComboPooledDataSource"><br>                <set name="driverClass">oracle.jdbc.driver.OracleDriver</set><br>                <set name="jdbcUrl">jdbc:oracle:thin:@172.16.2.69:1521:ahltolljc</set><br>                <set name="user">dbuser2</set><br>                <set name="password">wtkjdb2</set><br>            </new><br>        </arg><br>    </new><br>3.修改报表模板中的数据源名字<br>这里只需要切换一下，在报表模板文件中的datasource的名字。如我们将稽查的数据源的名字定义为auditDataSource。然后只需要将模板中的DatabaseName改为这个名字即可。如：<br><code>&lt;DatabaseName&gt;&lt;![CDATA[auditDataSource]]&gt;&lt;/DatabaseName&gt;</code><br>修改DatabaseName节点，将模板中的节点名字依次替换。<br>然后测试了一下，只启动一个report服务，用稽查和收费同时调用，都能够正确的显示报表。所以以后实施部署的时候，稽查和收费完全可以只部署一个report服务，既省了工作量，又节省了服务器资源。</p>
 
             
           </span>
@@ -336,7 +335,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            发表于
             <time itemprop="dateCreated" datetime="2015-11-05T23:02:11+08:00" content="2015-11-05">
               2015-11-05
             </time>
@@ -344,7 +343,7 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
@@ -432,7 +431,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            发表于
             <time itemprop="dateCreated" datetime="2015-09-24T15:20:42+08:00" content="2015-09-24">
               2015-09-24
             </time>
@@ -440,7 +439,7 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
@@ -710,7 +709,7 @@ after rent house`
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            发表于
             <time itemprop="dateCreated" datetime="2015-08-04T11:12:56+08:00" content="2015-08-04">
               2015-08-04
             </time>
@@ -718,7 +717,7 @@ after rent house`
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
@@ -907,7 +906,7 @@ after rent house`
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            发表于
             <time itemprop="dateCreated" datetime="2015-08-04T10:02:22+08:00" content="2015-08-04">
               2015-08-04
             </time>
@@ -915,7 +914,7 @@ after rent house`
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
+              &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Maven/" itemprop="url" rel="index">
@@ -1097,21 +1096,21 @@ site-deploy 发布生成的站点到服务器上
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">7</span>
-              <span class="site-state-item-name">文章</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">分類</span>
+              <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">標籤</span>
+              <span class="site-state-item-name">标签</span>
               </a>
           </div>
 
@@ -1180,11 +1179,11 @@ site-deploy 发布生成的站点到服务器上
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  主題 -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
