@@ -59,7 +59,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/08/27/关于spring配置文件中resourceRef的配置/index.html">
 <meta property="og:site_name" content="HighburyW's blog">
 <meta property="og:description" content="关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。在tomcat上面：&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;qu">
-<meta property="og:updated_time" content="2015-11-08T07:35:56.752Z">
+<meta property="og:updated_time" content="2015-11-08T07:37:06.547Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于spring配置文件中resourceRef的配置">
 <meta name="twitter:description" content="关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。在tomcat上面：&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;qu">
@@ -262,7 +262,8 @@
       
 
       
-        <span itemprop="articleBody"><p>关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。<br>在tomcat上面：<br><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;&gt;</code><br>        <code>&lt;property name=&quot;resourceRef&quot;&gt;</code><br>            <code>&lt;value&gt;true&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>        <code>&lt;property name=&quot;jndiName&quot;&gt;</code><br>            <code>&lt;value&gt;jdbc/toll&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>    <code>&lt;/bean&gt;</code><br>我查了一下JndiObjectFactoryBean中的关于resourceRef的描述，在JndiLocatorSupport的抽象类中有这样的解释：<br>`/**</p>
+        <span itemprop="articleBody"><p>关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。<br>在tomcat上面：<br><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;&gt;</code><br>        <code>&lt;property name=&quot;resourceRef&quot;&gt;</code><br>            <code>&lt;value&gt;true&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>        <code>&lt;property name=&quot;jndiName&quot;&gt;</code><br>            <code>&lt;value&gt;jdbc/toll&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>    <code>&lt;/bean&gt;</code><br>我查了一下JndiObjectFactoryBean中的关于resourceRef的描述，在JndiLocatorSupport的抽象类中有这样的解释：</p>
+<p>`/**</p>
 <pre><code>* Set whether <span class="keyword">the</span> lookup occurs <span class="keyword">in</span> a J2EE container, i.e. <span class="keyword">if</span> <span class="keyword">the</span> prefix
 * <span class="string">"java:comp/env/"</span> needs <span class="keyword">to</span> be added <span class="keyword">if</span> <span class="keyword">the</span> JNDI <span class="property">name</span> doesn't already
 * <span class="keyword">contain</span> <span class="keyword">it</span>. Default <span class="keyword">is</span> <span class="string">"false"</span>.
