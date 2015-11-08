@@ -199,15 +199,6 @@
 
     
     
-      
-      
-        
-        
-        
-      
-
-      
-    
 
     
       
@@ -509,6 +500,104 @@ after rent house`
             
               
                 
+                <a class="post-title-link" href="/2015/09/18/oracle/" itemprop="url">
+                  ORA-01810的错误
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-09-18T15:52:16+08:00" content="2015-09-18">
+              2015-09-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>今天在写一个查询的时候用到to_date方法，我用</p>
+<p><code>to_date(&#39;2015-5-1 00:00:00&#39;,&#39;yyyy-MM-dd HH:mm:ss&#39;)</code><br>结果报ORA-01810 “格式代码出现两次”的错误.后来上网查询后,发现是格式化字符串有问题,其中不应该将某个格式重复两次,否则Oracle就不知道要从哪个占位区间去解析该字段了,正确的格式应该用MI来代表分钟,而不是java中的ss<br>Sql代码</p>
+<p><code>to_date(&#39;2015-5-1 00:00:00&#39;,&#39;yyyy-MM-dd HH:MI:SS&#39;)</code><br>24小时的可以用HH24来代替HH.</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/09/01/实施部署/" itemprop="url">
                   实施部署
                 </a>
@@ -563,6 +652,104 @@ after rent house`
           <span itemprop="articleBody">
             
               <p>在部署系统的时候，oracle是在集群上面。所以我们原先用使用sid来配置jdbcurl已经不行了，会导致服务启动不起来，因为对于集群来讲，每一个节点的sid都是不一样的。所以我们将原先的格式修改为集群下的配置，将sid来替换为service_name ，service_name 包含所有的节点。<br>原来的配置：<br><code>&lt;Set name=&quot;jdbcUrl&quot;&gt;jdbc:oracle:thin:@172.16.2.69:1521:ahltollglc&lt;/Set&gt;</code><br>修改为：<br><code>&lt;Set name=&quot;jdbcUrl&quot;&gt;jdbc:oracle:thin:@//172.16.2.69:1521/ahltollglc&lt;/Set&gt;</code><br>注：@ 后面加上//这是与使用sid的主要区别。<br>其实oracle连接java jdbc/ojdbc 驱动的方式一共有三种。第一种是Oracle Thin JDBC Driver，第二种是Oracle OCI JDBC Driver，第三种是Oracle 8i OCI JDBC Driver 。上面说的那两种配置的方式其实都是使用的Oracel Thin JDBC Driver这种驱动的方式，这种还有一种形式就是用数据库的TNSName来配置，如：<br><code>jdbc:oracle:thin:@TNSName</code><br>注：TNSName是本地的名称，这种方式我没有进行配置，因为这是本地命名服务配置的。估计远程的话这种方式应该是连接不上的，但是没有经过测试。<br>像Oracle OCI JDBC Driver这种方式配置url的方式为：<br><code>jdbc:oracle:oci:@port/service_name</code><br>//或者<br>jdbc:oracle:oci:@port:sid<br>oci这种形式是一种胖客户端的连接方式，而thin是一种瘦客户端的形式。用oci的话需要本地安装oracle的客户端，thin的话就不需要，所以大多数都是用的thin这种连接方式。最后还有一种是8i OCI这种驱动连接的方式，配置的方式为：<br><code>jdbc:oracle:oci8:@TNSName</code><br>这种需要引进classes12.zip这个文件。<br>以上就是在工作中总结的oracle的几种连接的方式。推荐的还是用service_name这种形式，官方现在也是推荐用这种形式，不再用sid这种去配置url。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/27/关于spring配置文件中resourceRef的配置/" itemprop="url">
+                  关于spring配置文件中resourceRef的配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-08-27T15:33:04+08:00" content="2015-08-27">
+              2015-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。<br>在tomcat上面：<br><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;&gt;</code><br>        <code>&lt;property name=&quot;resourceRef&quot;&gt;</code><br>            <code>&lt;value&gt;true&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>        <code>&lt;property name=&quot;jndiName&quot;&gt;</code><br>            <code>&lt;value&gt;jdbc/toll&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>    <code>&lt;/bean&gt;</code><br>我查了一下JndiObjectFactoryBean中的关于resourceRef的描述，在JndiLocatorSupport的抽象类中有这样的解释:</p>
+<p>   <code>/**</code><br>     <code>* Set whether the lookup occurs in a J2EE container, i.e. if the prefix</code><br>     <code>* &quot;java:comp/env/&quot; needs to be added if the JNDI name doesn&#39;t already</code><br>     <code>* contain it. Default is &quot;false&quot;.</code><br>     <code>* &lt;p&gt;Note: Will only get applied if no other scheme (e.g. &quot;java:&quot;) is given.</code><br>     <code>*/</code></p>
+<p>所以在tomcat中设置jndi的时候需要加上java:comp/env/，因此要设置为true，因为设置成为true之后，程序会自动添加java:comp/env/给jndi。设置为true对weblogic，jetty这些容器也不会产生影响，这样的话，我们在下收费站实施部署的时候，就不用考虑容器是什么而去修改这些配置文件了。</p>
 
             
           </span>
@@ -684,203 +871,6 @@ after rent house`
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/04/Java删除ArrayList中重复的元素/" itemprop="url">
-                  Java删除ArrayList中重复的元素
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-08-04T11:12:56+08:00" content="2015-08-04">
-              2015-08-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="Java删除ArrayList中的重复元素的2种方法">Java删除ArrayList中的重复元素的2种方法</h1><p>ArrayList是我们经常使用的集合类型之一。它允许我们添加多个null元素，重复的元素，还能够保持插入的顺序。<br>在具体学习和工作中我们经常会遇到需要删除ArrayList中重复的数据。下面我将代码举例探讨下两种删除的方法。</p>
-<h2 id="方法1：使用HashSet删除ArrayList中重复的元素">方法1：使用HashSet删除ArrayList中重复的元素</h2><p>在该方法中，我们使用HashSet来删除重复的元素。如你所知，HashSet不允许有重复的元素。我们使用HashSet的<br>这个属性来删除已建成的ArrayList中的重复元素。但是，这种方法有一个缺点。那就是，它会删除ArrayList中元<br>素的插入顺序。这意味着，删除重复的元素后，元素的插入顺序就不对了。先来看下面这个例子。</p>
-<pre><code>`<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.HashSet;
-
-<span class="keyword">public</span> class MainClass
-{
-    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args)
-    {
-        <span class="comment">//Constructing An ArrayList</span>
-
-        ArrayList&lt;<span class="keyword">String</span>&gt; listWithDuplicateElements = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JAVA"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"J2EE"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JSP"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"SERVLETS"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JAVA"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"STRUTS"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JSP"</span>);
-
-        <span class="comment">//Printing listWithDuplicateElements</span>
-
-        System.out.<span class="built_in">print</span>(<span class="string">"ArrayList With Duplicate Elements :"</span>);
-
-        System.out.<span class="built_in">println</span>(listWithDuplicateElements);
-
-        <span class="comment">//Constructing HashSet using listWithDuplicateElements</span>
-
-        HashSet&lt;<span class="keyword">String</span>&gt; <span class="built_in">set</span> = <span class="keyword">new</span> HashSet&lt;<span class="keyword">String</span>&gt;(listWithDuplicateElements);
-
-        <span class="comment">//Constructing listWithoutDuplicateElements using set</span>
-
-        ArrayList&lt;<span class="keyword">String</span>&gt; listWithoutDuplicateElements = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;(<span class="built_in">set</span>);
-
-        <span class="comment">//Printing listWithoutDuplicateElements</span>
-
-        System.out.<span class="built_in">print</span>(<span class="string">"ArrayList After Removing Duplicate Elements :"</span>);
-
-        System.out.<span class="built_in">println</span>(listWithoutDuplicateElements);
-    }
-}
-`
-</code></pre><p>输出结果：<br>       <code>ArrayList With Duplicate Elements :[JAVA, J2EE, JSP, SERVLETS, JAVA, STRUTS, JSP]
-        ArrayList After Removing Duplicate Elements :[JAVA, SERVLETS, JSP, J2EE, STRUTS]</code></p>
-<p>注意输出结果。你会发现，在删除重复元素之后，元素重新洗牌。不再按照插入顺序排列。如果你想在删除重复的元素<br>之后依然保持元素的插入顺序，那么不建议使用此方法。还有另一种方法，可以保证在删除重复的元素之后也不改变元<br>素的插入顺序。那就是使用LinkedHashSet。</p>
-<h2 id="方法2：使用LinkedHashSet删除ArrayList中重复的元素">方法2：使用LinkedHashSet删除ArrayList中重复的元素</h2><p>在该方法中，我们使用LinkedHashSet删除ArrayList中重复的元素。正如你知道的，LinkedHashSet不允许重复元素，同<br>时保持元素的插入顺序。LinkedHashSet的这两个属性可以确保在删除ArrayList中的重复元素之后，依然保持元素的插<br>入顺序。参见下面的例子。</p>
-<pre><code>`<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.LinkedHashSet;
-
-<span class="keyword">public</span> class MainClass
-{
-    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args)
-    {
-        <span class="comment">//Constructing An ArrayList</span>
-
-        ArrayList&lt;<span class="keyword">String</span>&gt; listWithDuplicateElements = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JAVA"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"J2EE"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JSP"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"SERVLETS"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JAVA"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"STRUTS"</span>);
-
-        listWithDuplicateElements.<span class="built_in">add</span>(<span class="string">"JSP"</span>);
-
-        <span class="comment">//Printing listWithDuplicateElements</span>
-
-        System.out.<span class="built_in">print</span>(<span class="string">"ArrayList With Duplicate Elements :"</span>);
-
-        System.out.<span class="built_in">println</span>(listWithDuplicateElements);
-
-        <span class="comment">//Constructing LinkedHashSet using listWithDuplicateElements</span>
-
-        LinkedHashSet&lt;<span class="keyword">String</span>&gt; <span class="built_in">set</span> = <span class="keyword">new</span> LinkedHashSet&lt;<span class="keyword">String</span>&gt;(listWithDuplicateElements);
-
-        <span class="comment">//Constructing listWithoutDuplicateElements using set</span>
-
-        ArrayList&lt;<span class="keyword">String</span>&gt; listWithoutDuplicateElements = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;(<span class="built_in">set</span>);
-
-        <span class="comment">//Printing listWithoutDuplicateElements</span>
-
-        System.out.<span class="built_in">print</span>(<span class="string">"ArrayList After Removing Duplicate Elements :"</span>);
-
-        System.out.<span class="built_in">println</span>(listWithoutDuplicateElements);
-    }
-}`
-</code></pre><p>输出：<br>    <code>ArrayList With Duplicate Elements :[JAVA, J2EE, JSP, SERVLETS, JAVA, STRUTS, JSP]
-     ArrayList After Removing Duplicate Elements :[JAVA, J2EE, JSP, SERVLETS, STRUTS]</code></p>
-<p>这样，我们就保持了ArrayList的原有插入顺序。但是同样需要注意的一点是LinkedHashSet在迭代访问Set中的全部元素时，<br>性能比HashSet好，但是插入时性能稍微逊色于HashSet。看具体操作的时候需要那种结果。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -927,21 +917,21 @@ after rent house`
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
