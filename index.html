@@ -133,7 +133,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            归档
+            歸檔
           </a>
         </li>
       
@@ -143,7 +143,7 @@
             
               <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
             
-            关于
+            關於
           </a>
         </li>
       
@@ -153,7 +153,7 @@
             
               <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
-            分类
+            分類
           </a>
         </li>
       
@@ -163,7 +163,7 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            标签
+            標籤
           </a>
         </li>
       
@@ -199,15 +199,6 @@
 
     
     
-      
-      
-        
-        
-        
-      
-
-      
-    
 
     
       
@@ -241,7 +232,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            發表於
             <time itemprop="dateCreated" datetime="2015-09-24T15:20:42+08:00" content="2015-09-24">
               2015-09-24
             </time>
@@ -249,7 +240,7 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
@@ -519,7 +510,7 @@ after rent house`
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            發表於
             <time itemprop="dateCreated" datetime="2015-09-01T23:02:11+08:00" content="2015-09-01">
               2015-09-01
             </time>
@@ -527,7 +518,7 @@ after rent house`
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
@@ -605,6 +596,108 @@ after rent house`
             
               
                 
+                <a class="post-title-link" href="/2015/08/27/关于spring配置文件中resourceRef的配置/" itemprop="url">
+                  关于spring配置文件中resourceRef的配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-08-27T15:33:04+08:00" content="2015-08-27">
+              2015-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。<br>在tomcat上面：<br><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;&gt;</code><br>        <code>&lt;property name=&quot;resourceRef&quot;&gt;</code><br>            <code>&lt;value&gt;true&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>        <code>&lt;property name=&quot;jndiName&quot;&gt;</code><br>            <code>&lt;value&gt;jdbc/toll&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>    <code>&lt;/bean&gt;</code><br>我查了一下JndiObjectFactoryBean中的关于resourceRef的描述，在JndiLocatorSupport的抽象类中有这样的解释：<br>`/**</p>
+<pre><code>* Set whether <span class="keyword">the</span> lookup occurs <span class="keyword">in</span> a J2EE container, i.e. <span class="keyword">if</span> <span class="keyword">the</span> prefix
+* <span class="string">"java:comp/env/"</span> needs <span class="keyword">to</span> be added <span class="keyword">if</span> <span class="keyword">the</span> JNDI <span class="property">name</span> doesn't already
+* <span class="keyword">contain</span> <span class="keyword">it</span>. Default <span class="keyword">is</span> <span class="string">"false"</span>.
+* &lt;p&gt;Note: Will only <span class="keyword">get</span> applied <span class="keyword">if</span> no other scheme (e.g. <span class="string">"java:"</span>) <span class="keyword">is</span> <span class="keyword">given</span>.
+*/`
+</code></pre><p>所以在tomcat中设置jndi的时候需要加上java:comp/env/，因此要设置为true，因为设置成为true之后，程序会自动添加java:comp/env/给jndi。设置为true对weblogic，jetty这些容器也不会产生影响，这样的话，我们在下收费站实施部署的时候，就不用考虑容器是什么而去修改这些配置文件了。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/08/21/jndi多数据源配置/" itemprop="url">
                   jndi多数据源配置
                 </a>
@@ -615,7 +708,7 @@ after rent house`
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            發表於
             <time itemprop="dateCreated" datetime="2015-08-21T23:12:29+08:00" content="2015-08-21">
               2015-08-21
             </time>
@@ -623,7 +716,7 @@ after rent house`
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
@@ -715,7 +808,7 @@ after rent house`
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            發表於
             <time itemprop="dateCreated" datetime="2015-08-04T11:12:56+08:00" content="2015-08-04">
               2015-08-04
             </time>
@@ -723,7 +816,7 @@ after rent house`
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
@@ -881,180 +974,6 @@ after rent house`
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/04/Maven知识整理/" itemprop="url">
-                  Maven知识整理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-08-04T10:02:22+08:00" content="2015-08-04">
-              2015-08-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">Maven</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h3 id="maven快速入门">maven快速入门</h3><ol>
-<li>maven介绍以及环境搭建<br>maven是基于项目对象模型(pom),可以通过一小段描述信息来管理项目的构建、<br>报告、和文档的软件项目管理工具。覆盖编译，打包，清理等周期。<br><a href="http://maven.apache.org" target="_blank" rel="external">maven下载地址</a><br>下载解压后有四个文件夹。bin中是一些mvn的运行脚本。在命令行中可以用mvn进行调用这些脚本。<br>boot下面是一个maven的类加载器的框架。config下面是配置文件，例如主要的settings配置文件。<br>lib目录下面是maven常用的一些jar。</li>
-<li>配置环境变量<br>在系统变量中新建一个M2_HOME路径为maven的安装目录。<br>然后在path中加入%M2_HOME/bin。然后在命令行中输入mvn -v来查看是否安装成功。</li>
-<li>maven pom文件中几个属性值<br>groupId为项目的包名;<br>artifactId是模块名（项目名）;<br>version SNAPSHOT就是快照（一般用0.0.1SNAPSHOT）;</li>
-</ol>
-<h3 id="maven核心知识">maven核心知识</h3><ol>
-<li>常用的构建命令<br>mvn- v 查看版本<br>  compile 编译<br>  test 测试<br>  package 打包<br>  clean 删除target<br>  install 安装jar到本地仓库中 </li>
-<li>自动创建目录骨架 archetype插件<br>mvn -archetype generate 下载插件<br>按照提示去创建，也可以直接在后面跟上 -DgroupId -DartifactId -Dversion -Dpackage</li>
-<li>maven中的坐标和仓库<br>坐标：groupId为项目的包名<br>   artifactId是模块名（项目名）<br>   version 版本<br>仓库：本地<br>   远程(lib目录下面的maven-model-bulider.jar中pom文件中)<br>镜像仓库：settings.xml中的mirrors中的mirror<br>更改仓库位置：settings.xml中localRepository属性进行配置更改<pre><code>例如改为<span class="constant">E</span><span class="symbol">:/myMavenStore</span>,然后将settings文件放到当前文件夹中，方便以后修改管理
-</code></pre></li>
-<li>在eclipse4.0以后，将maven插件是内置的不需要下载。如果用以前的版本，可以下载插件，不再赘述。<br>在eclipse中选择新建maven项目有两种。<br>maven-archetype-quickstart<br>默认的Archetype,基本内容包括：<br>一个包含junit依赖声明的pom.xml<br>src/main/java主代码目录及一个名为App的类<br>src/test/java测试代码目录及一个名为AppTest的测试用例<br>maven-archetype-webapp<br>一个最简单的Maven war项目模板，当需要快速创建一个Web应用的时候可以使用它。生成的项目内容包括：<br>一个packaging为war且带有junit依赖声明的pom.xml<br>src/main/webapp/目录<br>src/main/webapp/index.jsp文件<br>src/main/webapp/WEB-INF/web.xml文件</li>
-<li><p>maven的生命周期和插件<br>完整的项目构建过程包括：<br>清理，编译，测试，打包，集成测试，验证，部署<br>maven的生命周期：</p>
-<pre><code>clean   清理项目
-<span class="keyword">default</span> 构建项目
-<span class="keyword">compile</span> test <span class="keyword">package</span> install
-site    生成项目站点
-pre-site 在生成站点前完成的工作
-site 生成项目的站点文档
-post-site 在生成项目站点后要完成的工作
-site-deploy 发布生成的站点到服务器上
-</code></pre><p>maven的插件有很多。比如将项目源码打包的source，还有代码检测的findbugs等等。<br>具体配置例如：</p>
-<pre><code>`<span class="tag">&lt;<span class="title">plugin</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>findbugs-maven-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">version</span>&gt;</span>${findbugs-maven-plugin.version}<span class="tag">&lt;/<span class="title">version</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">executions</span>&gt;</span>
-                <span class="tag">&lt;<span class="title">execution</span>&gt;</span>
-                <span class="comment">&lt;!--阶段--&gt;</span>
-                    <span class="tag">&lt;<span class="title">phase</span>&gt;</span>verify<span class="tag">&lt;/<span class="title">phase</span>&gt;</span>
-                <span class="comment">&lt;!--目标--&gt;</span>
-                    <span class="tag">&lt;<span class="title">goals</span>&gt;</span>
-                         <span class="tag">&lt;<span class="title">goal</span>&gt;</span>check<span class="tag">&lt;/<span class="title">goal</span>&gt;</span>
-                    <span class="tag">&lt;/<span class="title">goals</span>&gt;</span>
-                <span class="tag">&lt;/<span class="title">execution</span>&gt;</span>
-            <span class="tag">&lt;/<span class="title">executions</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">plugin</span>&gt;</span>`
-</code></pre></li>
-<li><p>pom讲解<br>pom中的标签<br>详解<a href="http://blog.csdn.net/sunzhenhua0608/article/details/32938533" target="_blank" rel="external">http://blog.csdn.net/sunzhenhua0608/article/details/32938533</a></p>
-</li>
-<li>依赖范围<br>控制依赖与具体classpath的关系<br>scope ：<br>  compile  默认的范围，编译，测试运行都有效<br>  provided  编译和测试时有效<br>  runtime  测试和运行时有效<br>  test   测试的时候有效<br>  system  编译和测试时有效，要与本地项目相关联<br>  import 只用在dependencyManagement中，表示从其他的pom中导入dependency的配置</li>
-<li>依赖传递<br>A&gt;B&gt;C<br>B依赖A，C依赖B<br>在B中配置，<pre><code>`<span class="tag">&lt;<span class="title">dependencies</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>A<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>A<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-        <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span> `
-</code></pre>在C中配置<pre><code>`<span class="tag">&lt;<span class="title">dependencies</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>B<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>B<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-        <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span>`
-</code></pre>但是这样存在一个问题，由于依赖存在传递性，其实C中也存在A，但是C不需要依赖A，只需要依赖B即可<br>所以我们可以加上如下的配置：<pre><code>`<span class="tag">&lt;<span class="title">dependencies</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>B<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>B<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">exclusions</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">exclusion</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>A<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>A<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-            <span class="tag">&lt;/<span class="title">exclusion</span>&gt;</span>
-            <span class="tag">&lt;/<span class="title">exclusions</span>&gt;</span>
-        <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span>`
-</code></pre></li>
-<li>依赖冲突<br>依赖冲突就是说A，B依赖了不同的版本一个构建，但是C又同时依赖A,B.这样就导致了版本冲突。<br>解决的方案：<pre><code>9<span class="class">.1</span> 短路优先  依据读取的路径，依赖离得最近的优先解析。
-     举例：<span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">C</span>&gt;<span class="tag">X</span><span class="class">.jar</span>
-           <span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">X</span><span class="class">.1</span><span class="class">.jar</span>
-     优先解析的是   <span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">X</span><span class="class">.1</span><span class="class">.jar</span>
-9<span class="class">.2</span> 先声明先优先  如果路径也相同，那就是看配置的先后顺序
-</code></pre></li>
-<li>聚合和继承<pre><code>10.1 聚合
-     如果将多个项目<span class="operator"><span class="keyword">install</span>安装到本地仓库中，对此依次执行，但是可以有聚合的方式，一次执行它。
-     在聚合项目的pom中将最上面的package改为pom。不用dependencys 而是使用modules 然后将<span class="keyword">install</span>的项目配置的<span class="keyword">module</span>标签中。
-     (eclipse可以自动提示)
-<span class="number">10.2</span> 继承 
-     使用parent标签。</span>
-</code></pre></li>
-</ol>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1101,22 +1020,22 @@ site-deploy 发布生成的站点到服务器上
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
-              <span class="site-state-item-name">日志</span>
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">分类</span>
+              <span class="site-state-item-name">分類</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">标签</span>
+              <span class="site-state-item-name">標籤</span>
               </a>
           </div>
 
@@ -1185,11 +1104,11 @@ site-deploy 发布生成的站点到服务器上
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
 </div>
 
 <div class="theme-info">
-  主题 -
+  主題 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
