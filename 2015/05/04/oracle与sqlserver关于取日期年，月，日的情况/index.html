@@ -37,7 +37,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="记录," />
 
 
 
@@ -53,19 +53,22 @@
 
 
 
-<meta name="description" content="Java中的网络支持根据网络的不同层次，Java提供的网络功能有四大类1.InetAddress :用于标识网络上的硬件资源。2.URL :统一资源定位符 通过URL可以直接读取或者写入网络上面的数据。3.Sockets :使用TCP协议实现网络通信的Scoket相关的类。4.Datagram :使用UDP协议 将数据保存在数据报文中 通过网络进行通信。
-InetAddress类InetAddre">
+<meta name="description" content="用sqlserver去实现查询某一旬的数据，用的day去实现。例如：
+if  day(&amp;#39;${endDT}&amp;#39;)&amp;lt;=10
+(SELECT stockBox,stockCard  from IC_BalanceUpload where FinDT=dateAdd(dd, -day(&amp;#39;${endDT}&amp;#39;)+1, &amp;#39;${endDT}&amp;#39;) and offS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Socket应用">
-<meta property="og:url" content="http://yoursite.com/2015/07/26/Socket应用/index.html">
+<meta property="og:title" content="oracle与sqlserver关于取日期年，月，日的情况">
+<meta property="og:url" content="http://yoursite.com/2015/05/04/oracle与sqlserver关于取日期年，月，日的情况/index.html">
 <meta property="og:site_name" content="HighburyW's blog">
-<meta property="og:description" content="Java中的网络支持根据网络的不同层次，Java提供的网络功能有四大类1.InetAddress :用于标识网络上的硬件资源。2.URL :统一资源定位符 通过URL可以直接读取或者写入网络上面的数据。3.Sockets :使用TCP协议实现网络通信的Scoket相关的类。4.Datagram :使用UDP协议 将数据保存在数据报文中 通过网络进行通信。
-InetAddress类InetAddre">
-<meta property="og:updated_time" content="2015-07-26T15:09:31.170Z">
+<meta property="og:description" content="用sqlserver去实现查询某一旬的数据，用的day去实现。例如：
+if  day(&amp;#39;${endDT}&amp;#39;)&amp;lt;=10
+(SELECT stockBox,stockCard  from IC_BalanceUpload where FinDT=dateAdd(dd, -day(&amp;#39;${endDT}&amp;#39;)+1, &amp;#39;${endDT}&amp;#39;) and offS">
+<meta property="og:updated_time" content="2015-11-08T08:04:16.261Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Socket应用">
-<meta name="twitter:description" content="Java中的网络支持根据网络的不同层次，Java提供的网络功能有四大类1.InetAddress :用于标识网络上的硬件资源。2.URL :统一资源定位符 通过URL可以直接读取或者写入网络上面的数据。3.Sockets :使用TCP协议实现网络通信的Scoket相关的类。4.Datagram :使用UDP协议 将数据保存在数据报文中 通过网络进行通信。
-InetAddress类InetAddre">
+<meta name="twitter:title" content="oracle与sqlserver关于取日期年，月，日的情况">
+<meta name="twitter:description" content="用sqlserver去实现查询某一旬的数据，用的day去实现。例如：
+if  day(&amp;#39;${endDT}&amp;#39;)&amp;lt;=10
+(SELECT stockBox,stockCard  from IC_BalanceUpload where FinDT=dateAdd(dd, -day(&amp;#39;${endDT}&amp;#39;)+1, &amp;#39;${endDT}&amp;#39;) and offS">
 
 
 
@@ -77,7 +80,7 @@ InetAddress类InetAddre">
   };
 </script>
 
-  <title> Socket应用 | HighburyW's blog </title>
+  <title> oracle与sqlserver关于取日期年，月，日的情况 | HighburyW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -217,7 +220,7 @@ InetAddress类InetAddre">
             
             
               
-                Socket应用
+                oracle与sqlserver关于取日期年，月，日的情况
               
             
           </h1>
@@ -226,8 +229,8 @@ InetAddress类InetAddre">
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-07-26T18:32:54+08:00" content="2015-07-26">
-              2015-07-26
+            <time itemprop="dateCreated" datetime="2015-05-04T16:01:48+08:00" content="2015-05-04">
+              2015-05-04
             </time>
           </span>
 
@@ -236,8 +239,8 @@ InetAddress类InetAddre">
               &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -265,30 +268,39 @@ InetAddress类InetAddre">
       
 
       
-        <span itemprop="articleBody"><h1 id="Java中的网络支持">Java中的网络支持</h1><h2 id="根据网络的不同层次，Java提供的网络功能有四大类">根据网络的不同层次，Java提供的网络功能有四大类</h2><p>1.InetAddress :用于标识网络上的硬件资源。<br>2.URL :统一资源定位符 通过URL可以直接读取或者写入网络上面的数据。<br>3.Sockets :使用TCP协议实现网络通信的Scoket相关的类。<br>4.Datagram :使用UDP协议 将数据保存在数据报文中 通过网络进行通信。</p>
-<h3 id="InetAddress类">InetAddress类</h3><p>InetAddress没有构造方法，所以我们不能直接new出一个对象。但是api上面可以看出，InetAddress<br>有很多的静态方法，返回的实例就是InetAddress的。通过InetAddress的实例，我们可以得到计算机名，<br>IP地址等。</p>
-<h3 id="URL">URL</h3><p>URL由两部分构成，协议名称和资源名称，中间用冒号隔开。java中获得URL的实例可以通过构造方法去new<br>出来。</p>
+        <span itemprop="articleBody"><p>用sqlserver去实现查询某一旬的数据，用的day去实现。<br>例如：</p>
+<p><code>if  day(&#39;${endDT}&#39;)&lt;=10
+(SELECT stockBox,stockCard  from IC_BalanceUpload where FinDT=dateAdd(dd, -day(&#39;${endDT}&#39;)+1, &#39;${endDT}&#39;) and offStaID=${orgCode}) 
+else IF  day(&#39;${endDT}&#39;)&lt;=20
+(SELECT stockBox,stockCard  from IC_BalanceUpload where FinDT=dateAdd(dd, -day(&#39;${endDT}&#39;)+11, &#39;${endDT}&#39;) and offStaID=${orgCode}) 
+ELSE
+(SELECT stockBox,stockCard  from IC_BalanceUpload where FinDT=dateAdd(dd, -day(&#39;${endDT}&#39;)+21, &#39;${endDT}&#39;) and offStaID=${orgCode})</code><br>现在要转为oracle的，发现oracle中可以有两种实现sqlsever中类似于day函数。<br>第一种：</p>
+<p><code>select extract(day from to_date(&#39;2015-4-29&#39;,&#39;yyyy-mm-dd&#39;)) as dd from dual;</code><br>第二种：</p>
+<p><code>Select to_char(to_date(&#39;2015-4-29&#39;,&#39;yyyy-mm-dd&#39;),&#39;dd&#39;) as dd from dual;</code><br>相对于第二种来讲，第一种方法省去类型转换，更加简洁一点。相应的转换sqlserver中的month或者year函数的时候可以用yyyy和mm来代替。</p>
+<p>关于oracle中根据日期取不同旬数据，我还是像第一段sql一样根据取日期去分别判断的，不知道除此之外还有没有更好的方法去实现，求推荐。ps：不用自定义函数之类。</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/记录/" rel="tag">#记录</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/05/05/杂七杂八/" rel="next" title="杂七杂八（一）">
-                <i class="fa fa-chevron-left"></i> 杂七杂八（一）
-              </a>
-            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/08/04/Maven知识整理/" rel="prev" title="Maven知识整理">
-                Maven知识整理 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/05/05/杂七杂八/" rel="prev" title="杂七杂八（一）">
+                杂七杂八（一） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -443,7 +455,7 @@ var duoshuoQuery = {short_name:"laki"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的网络支持"><span class="nav-number">1.</span> <span class="nav-text">Java中的网络支持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#根据网络的不同层次，Java提供的网络功能有四大类"><span class="nav-number">1.1.</span> <span class="nav-text">根据网络的不同层次，Java提供的网络功能有四大类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InetAddress类"><span class="nav-number">1.1.1.</span> <span class="nav-text">InetAddress类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL"><span class="nav-number">1.1.2.</span> <span class="nav-text">URL</span></a></li></ol></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目錄</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
