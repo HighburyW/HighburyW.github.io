@@ -222,6 +222,131 @@
             
               
                 
+                <a class="post-title-link" href="/2015/07/01/Python字符串处理/" itemprop="url">
+                  Python中字符串格式化输出
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-07-01T13:19:32+08:00" content="2015-07-01">
+              2015-07-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h4 id="字符串格式化输出">字符串格式化输出</h4><p>格式化字符串，是C、C++等程序设计语言printf类函数中用于指定输出参数的格式与相对位置的字符串参数。其中的转换说明（conversion specification）用于把随后对应的0个或多个函数参数转换为相应的格式输出；格式化字符串中转换说明以外的其它字符原样输出。Java中也有对应的格式化输出，是printf。下面在Python中举例：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; <span class="string">"I like %s"</span></span><br><span class="line"><span class="string">'I like %s'</span></span><br></pre></td></tr></table></figure></p>
+<p>%s就是一个占位符，代表这个可以被别的字符串给代替。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; <span class="string">"I like %s"</span> % <span class="string">"python"</span></span><br><span class="line"><span class="string">'I like python'</span></span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; <span class="string">"I like %s"</span> % <span class="string">"Java"</span></span><br><span class="line"><span class="string">'I like Java'</span></span><br></pre></td></tr></table></figure></p>
+<p>另外，不同的占位符，会表示那个位置应该被不同类型的对象填充。下面列出许多，供参考。不过，不用记忆，常用的只有%s和%d，或者再加上%f，其它的如果需要了，可以自己上网查查。</p>
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%s</td>
+<td style="text-align:right">字符串(采用str()的显示)</td>
+</tr>
+<tr>
+<td>%r</td>
+<td style="text-align:right">字符串(采用repr()的显示)</td>
+</tr>
+<tr>
+<td>%f</td>
+<td style="text-align:right">浮点数</td>
+</tr>
+</tbody>
+</table>
+<p>其实，上面这种格式化方法，常常被认为是太“古老”了。因为在python中还有新的格式化方法。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; s1 = <span class="string">"I like &#123;0&#125;"</span>.format(<span class="string">"python"</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; s1</span><br><span class="line"><span class="string">'I like python'</span></span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; s2 = <span class="string">"Lanzhou is more than &#123;0&#125; years. &#123;1&#125; lives in here."</span>.format(<span class="number">2500</span>, <span class="string">"my family"</span>) </span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; s2</span><br><span class="line"><span class="string">'Lanzhou is more than 2500 years. my family lives in here.'</span></span><br></pre></td></tr></table></figure></p>
+<p>还有一种是字典的形式，是最麻烦的，有兴趣可以上网去找找，一般用format就很好了，简单明了。</p>
+<h4 id="常用的字符串方法">常用的字符串方法</h4><h5 id="split">split</h5><p>这个函数的作用是将字符串根据某个分割符进行分割。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="tag">a</span> = <span class="string">"I LOVE PYTHON"</span></span><br><span class="line">&gt;&gt;&gt; <span class="tag">a</span>.<span class="function"><span class="title">split</span><span class="params">(<span class="string">" "</span>)</span></span></span><br><span class="line">[<span class="string">'I'</span>, <span class="string">'LOVE'</span>, <span class="string">'PYTHON'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>还是跟Java中的方法差不多。最后得到一个list。</p>
+<h5 id="去掉字符串两头的空格">去掉字符串两头的空格</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">S.<span class="function"><span class="title">strip</span><span class="params">()</span></span>  去掉字符串的左右空格</span><br><span class="line">S.<span class="function"><span class="title">lstrip</span><span class="params">()</span></span> 去掉字符串的左边空格</span><br><span class="line">S.<span class="function"><span class="title">rstrip</span><span class="params">()</span></span> 去掉字符串的右边空格</span><br></pre></td></tr></table></figure>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/06/30/Python的索引与切片/" itemprop="url">
                   Python中的索引与切片
                 </a>
@@ -548,7 +673,7 @@ ELSE
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>

@@ -318,6 +318,108 @@
             
               
                 
+                <a class="post-title-link" href="/2015/10/24/Spring boot连接mysql/" itemprop="url">
+                  Spring boot连接mysql
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-10-24T17:20:42+08:00" content="2015-10-24">
+              2015-10-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>最近接触了一下SpringBoot,一个“约定大于配置”的微框架。大概的使用了一下，确实比咱们传统的spring在配置上面简化了很多，很多事情不需要通过web.xml和applicationConetxt.xml进行配置。而且启动服务，有内置的tomcat和jboss容器，也很容易。总的来讲，其实就是就是一些库的集合，它能够被任意项目的构建系统所使用。我建立了一个maven项目，写了一个启动web的例子和连接数据库的例子。<br>1.web<br>pom配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.2.5.RELEASE<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.2.5.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.2.5.RELEASE<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>5.1.35<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>启动springboot的话，只需要spring-boot-starter-web就可以了 。然后编写一个类包含处理HTTP请求的方法以及一个main()函数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Controller</span></span><br><span class="line"><span class="annotation">@EnableAutoConfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleController</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="annotation">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">    <span class="annotation">@ResponseBody</span></span><br><span class="line">    <span class="function">String <span class="title">home</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello World!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SpringApplication.run(SampleController.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://wiki.wantong-tech.net/download/attachments/31854096/FXFGI0Q2%60O%24_Y%7BW__7IO%5D%289.png?version=1&amp;modificationDate=1447947606000&amp;api=v2" alt=""><br>启动main函数后，在控制台中可以发现启动了一个Tomcat容器，一个基于Spring MVC的应用也同时启动起来，这时访问<a href="http://localhost:8080就可以看到Hello" target="_blank" rel="external">http://localhost:8080就可以看到Hello</a> World!出现在浏览器中了。同时控制台上面打印出的spring看着很爽。@EnableAutoConfiguration这个配置就是springboot特有的，作用就是按照应用中配置的依赖对spring的自动配置，减少开发量。@Controller和@RequestMapping也可以合体为@ResController。作用都是一样的。SpringApplication是个帮助类，它的作用就是帮助启动上下文。所以说上面整个代码的流程就是SpringApplication执行run方法，然后configuration发现这是一个Web应用（根据类路径上的依赖确定），于是在内嵌的Tomcat容器中启动了一个Spring的应用上下文，并且监听默认的tcp端口8080（默认约定）。同时在Spring Context中根据默认的约定配置了Spring WebMvc：<br>Servlet容器默认的Context路径是/<br>DispatherServlet匹配的路径(servlet-mapping中的url-patterns)是/*<br>@ComponentScan路径被默认设置为SampleController的同名package，也就是该package下的所有@Controller，@Service, @Component, @Repository都会被实例化后并加入Spring Context中。<br>需要注意的是，@ComponentScan默认扫描的是SampleController下面的所有bean，所以下面连接数据库测试的例子，SampleController就放在根目录下面。<br>2.数据库<br>连接数据库的例子我用mysql，有机会再写一个mongoDB的例子。springboot对关系型数据库和非关系型数据库都有很好的支持。spring-boot-starter-data-mongodb就是mongodb在maven中的配置。整个项目的结构是：<br><img src="http://wiki.wantong-tech.net/download/attachments/31854096/6%7B~X%25NZHUSQCY6O%28DJ~EL%24Q.png?version=1&amp;modificationDate=1447947606000&amp;api=v2" alt=""><br>DateSource的信息配置在resource中配置一个application.properties的文件：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring<span class="class">.datasource</span><span class="class">.url</span>=jdbc:mysql:<span class="comment">//localhost/test</span></span><br><span class="line">spring<span class="class">.datasource</span><span class="class">.username</span>=root</span><br><span class="line">spring<span class="class">.datasource</span><span class="class">.password</span>=wyd</span><br><span class="line">spring<span class="class">.datasource</span><span class="class">.driver-class-name</span>=com<span class="class">.mysql</span><span class="class">.jdbc</span><span class="class">.Driver</span></span><br></pre></td></tr></table></figure></p>
+<p>bean是Visitor,这个没什么好说的，VisitorDao中写了一个insert的方法：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VisitorDao</span> &#123;</span></span><br><span class="line">     </span><br><span class="line">    <span class="keyword">static</span> Log log = LogFactory.getLog(VisitorDao.<span class="keyword">class</span>);</span><br><span class="line">     </span><br><span class="line">    <span class="annotation">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> JdbcTemplate jdbcTemplate;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">public</span> <span class="typename">boolean</span> insertVistor(<span class="keyword">final</span> Visitor vistor) &#123;</span><br><span class="line">        <span class="typename">boolean</span> flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="typename">int</span> i = jdbcTemplate.update(<span class="string">"insert into  visitor(name,email,status,createtime) values(?,?,?,?)"</span>, <span class="keyword">new</span> Object[] &#123;</span><br><span class="line">                vistor.getName(), vistor.getEmail(), vistor.getStatus(), vistor.getCreateTime() &#125;);</span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接着就是一个service层，我在执行的run中调用inset方法，去插入数据，就ok了。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleDataService</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> &#123;</span></span><br><span class="line">     </span><br><span class="line">    <span class="keyword">static</span> Log log = LogFactory.getLog(SampleDataService.<span class="keyword">class</span>);</span><br><span class="line">     </span><br><span class="line">    <span class="annotation">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> VisitorDao visitorDao;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">public</span> <span class="typename">void</span> run(String... args)  &#123;</span><br><span class="line">                Visitor visitor = <span class="keyword">new</span> Visitor();</span><br><span class="line">                visitor.setEmail(<span class="string">"11121112@11.com"</span>);</span><br><span class="line">                visitor.setName(<span class="string">"china"</span>);</span><br><span class="line">                visitor.setStatus(<span class="number">1</span>);</span><br><span class="line">                visitorDao.insertVistor(visitor);</span><br><span class="line">                log.info(<span class="string">"insert in test"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后启动SampleController，就会在控制台看到“inset in test”的输出。插入数据库成功。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/09/24/Java动态代理机制分析/" itemprop="url">
                   Java动态代理机制分析
                 </a>
@@ -769,104 +871,6 @@ after rent house`
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/27/关于spring配置文件中resourceRef的配置/" itemprop="url">
-                  关于spring配置文件中resourceRef的配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-08-27T15:33:04+08:00" content="2015-08-27">
-              2015-08-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。<br>在tomcat上面：<br><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;&gt;</code><br>        <code>&lt;property name=&quot;resourceRef&quot;&gt;</code><br>            <code>&lt;value&gt;true&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>        <code>&lt;property name=&quot;jndiName&quot;&gt;</code><br>            <code>&lt;value&gt;jdbc/toll&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>    <code>&lt;/bean&gt;</code><br>我查了一下JndiObjectFactoryBean中的关于resourceRef的描述，在JndiLocatorSupport的抽象类中有这样的解释:</p>
-<p>   <code>/**</code><br>     <code>* Set whether the lookup occurs in a J2EE container, i.e. if the prefix</code><br>     <code>* &quot;java:comp/env/&quot; needs to be added if the JNDI name doesn&#39;t already</code><br>     <code>* contain it. Default is &quot;false&quot;.</code><br>     <code>* &lt;p&gt;Note: Will only get applied if no other scheme (e.g. &quot;java:&quot;) is given.</code><br>     <code>*/</code></p>
-<p>所以在tomcat中设置jndi的时候需要加上java:comp/env/，因此要设置为true，因为设置成为true之后，程序会自动添加java:comp/env/给jndi。设置为true对weblogic，jetty这些容器也不会产生影响，这样的话，我们在下收费站实施部署的时候，就不用考虑容器是什么而去修改这些配置文件了。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -913,7 +917,7 @@ after rent house`
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
