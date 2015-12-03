@@ -37,7 +37,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -53,16 +53,18 @@
 
 
 
-<meta name="description" content="关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。在tomcat上面：&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;qu">
+<meta name="description" content="由于我们现在生产，开发，测试的数据库很多，而且管理处和集团暂时未同库。开发一般在svn上面提交脚本之后，并未及时的将脚本给测试人员，所以日常中经常会发生各个数据库中脚本未统一的问题，而导致一些没必要的bug出现。为了避免出现这种情况，我找了一个数据库迁移的工具flyway。这款工具对mysql，oracle，sqlserver，postgreSQL等主流关系型数据库都有很好的支持。Flyway 的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于spring配置文件中resourceRef的配置">
-<meta property="og:url" content="http://yoursite.com/2015/08/27/关于spring配置文件中resourceRef的配置/index.html">
+<meta property="og:title" content="数据库迁移框架——Flyway">
+<meta property="og:url" content="http://yoursite.com/2015/09/11/数据库迁移框架——Flyway/index.html">
 <meta property="og:site_name" content="HighburyW's blog">
-<meta property="og:description" content="关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。在tomcat上面：&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;qu">
-<meta property="og:updated_time" content="2015-11-08T07:47:14.459Z">
+<meta property="og:description" content="由于我们现在生产，开发，测试的数据库很多，而且管理处和集团暂时未同库。开发一般在svn上面提交脚本之后，并未及时的将脚本给测试人员，所以日常中经常会发生各个数据库中脚本未统一的问题，而导致一些没必要的bug出现。为了避免出现这种情况，我找了一个数据库迁移的工具flyway。这款工具对mysql，oracle，sqlserver，postgreSQL等主流关系型数据库都有很好的支持。Flyway 的">
+<meta property="og:image" content="http://wiki.wantong-tech.net/download/attachments/31853536/4%60QX%7BR0%60OZY_F_L%2904PZ%7D88.png?version=1&modificationDate=1447399889000&api=v2">
+<meta property="og:image" content="http://wiki.wantong-tech.net/download/attachments/31853536/%5D%7DUT7B2KVMVJK028U_DBZ%7B9.png?version=1&modificationDate=1447399889000&api=v2">
+<meta property="og:updated_time" content="2015-12-03T12:26:01.840Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于spring配置文件中resourceRef的配置">
-<meta name="twitter:description" content="关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。在tomcat上面：&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;qu">
+<meta name="twitter:title" content="数据库迁移框架——Flyway">
+<meta name="twitter:description" content="由于我们现在生产，开发，测试的数据库很多，而且管理处和集团暂时未同库。开发一般在svn上面提交脚本之后，并未及时的将脚本给测试人员，所以日常中经常会发生各个数据库中脚本未统一的问题，而导致一些没必要的bug出现。为了避免出现这种情况，我找了一个数据库迁移的工具flyway。这款工具对mysql，oracle，sqlserver，postgreSQL等主流关系型数据库都有很好的支持。Flyway 的">
 
 
 
@@ -74,7 +76,7 @@
   };
 </script>
 
-  <title> 关于spring配置文件中resourceRef的配置 | HighburyW's blog </title>
+  <title> 数据库迁移框架——Flyway | HighburyW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -214,7 +216,7 @@
             
             
               
-                关于spring配置文件中resourceRef的配置
+                数据库迁移框架——Flyway
               
             
           </h1>
@@ -223,8 +225,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-08-27T15:33:04+08:00" content="2015-08-27">
-              2015-08-27
+            <time itemprop="dateCreated" datetime="2015-09-11T20:25:11+08:00" content="2015-09-11">
+              2015-09-11
             </time>
           </span>
 
@@ -262,36 +264,30 @@
       
 
       
-        <span itemprop="articleBody"><p>关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。<br>在tomcat上面：<br><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;&gt;</code><br>        <code>&lt;property name=&quot;resourceRef&quot;&gt;</code><br>            <code>&lt;value&gt;true&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>        <code>&lt;property name=&quot;jndiName&quot;&gt;</code><br>            <code>&lt;value&gt;jdbc/toll&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>    <code>&lt;/bean&gt;</code><br>我查了一下JndiObjectFactoryBean中的关于resourceRef的描述，在JndiLocatorSupport的抽象类中有这样的解释:</p>
-<p>   <code>/**</code><br>     <code>* Set whether the lookup occurs in a J2EE container, i.e. if the prefix</code><br>     <code>* &quot;java:comp/env/&quot; needs to be added if the JNDI name doesn&#39;t already</code><br>     <code>* contain it. Default is &quot;false&quot;.</code><br>     <code>* &lt;p&gt;Note: Will only get applied if no other scheme (e.g. &quot;java:&quot;) is given.</code><br>     <code>*/</code></p>
-<p>所以在tomcat中设置jndi的时候需要加上java:comp/env/，因此要设置为true，因为设置成为true之后，程序会自动添加java:comp/env/给jndi。设置为true对weblogic，jetty这些容器也不会产生影响，这样的话，我们在下收费站实施部署的时候，就不用考虑容器是什么而去修改这些配置文件了。</p>
+        <span itemprop="articleBody"><p>由于我们现在生产，开发，测试的数据库很多，而且管理处和集团暂时未同库。开发一般在svn上面提交脚本之后，并未及时的将脚本给测试人员，所以日常中经常会发生各个数据库中脚本未统一的问题，而导致一些没必要的bug出现。为了避免出现这种情况，我找了一个数据库迁移的工具flyway。这款工具对mysql，oracle，sqlserver，postgreSQL等主流关系型数据库都有很好的支持。Flyway 的主要任务是管理数据库的版本更新，在Flyway 中称每次数据库更新为一个migration ，其实叫做upgrade(脚本升级)更加确切一点。Flyway 有6中运行的方式，包括命令行，java，maven，gradle，ant，sbt（这个不是很了解）。我这里只是简单的试了试java这种运行的方式。下面就实际的来举例说明一下。<br>1.在pom文件中引用flyway：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">project</span> <span class="attribute">xmlns</span>=<span class="value">"http://maven.apache.org/POM/4.0.0"</span> <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">    <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="title">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>com.wttech.flyway<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>flyway<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="title">packaging</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">name</span>&gt;</span>flyway Maven Webapp<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependencies</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.flywaydb<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>flyway-core<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">version</span>&gt;</span>3.2.1<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">version</span>&gt;</span>5.1.35<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.0.13&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">finalName</span>&gt;</span>flyway<span class="tag">&lt;/<span class="title">finalName</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>2.这是项目结构，flyway的升级脚本默认就放在resources下面的db/migration中。数据库脚本升级的话按照版本依次存放在这个文件下面。其中V1是指版本号V要大写，后面是一个 双下划线“__”的分隔符，再接着“2015_11_12”是指对脚本的描述，最后就是一个后缀。这是flyway升级脚本的命名格式。<br><img src="http://wiki.wantong-tech.net/download/attachments/31853536/4%60QX%7BR0%60OZY_F_L%2904PZ%7D88.png?version=1&amp;modificationDate=1447399889000&amp;api=v2" alt=""><br>3.java代码：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FlywayTest</span> &#123;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</span><br><span class="line">        Flyway flyway = <span class="keyword">new</span> Flyway();</span><br><span class="line">        flyway.setDataSource(<span class="string">"jdbc:mysql://localhost:3306/test"</span>, <span class="string">"root"</span>, <span class="string">"wyd"</span>);</span><br><span class="line">        flyway.setValidateOnMigrate(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 初始化的时候创建</span></span><br><span class="line">        <span class="comment">// flyway.baseline();</span></span><br><span class="line">        <span class="comment">// try &#123;</span></span><br><span class="line">        <span class="comment">//升级</span></span><br><span class="line">        flyway.migrate();</span><br><span class="line">        <span class="comment">// &#125; catch (Exception e) &#123;</span></span><br><span class="line">        <span class="comment">//出现异常回滚，不会在schema_version插入记录</span></span><br><span class="line">         <span class="comment">// e.printStackTrace();</span></span><br><span class="line">        <span class="comment">// flyway.repair();</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在执行升级脚本之前要在数据库中初始化一个flyway存放升级版本信息的表，叫做“schema_version”，里面的内容如下图所示：<br><img src="http://wiki.wantong-tech.net/download/attachments/31853536/%5D%7DUT7B2KVMVJK028U_DBZ%7B9.png?version=1&amp;modificationDate=1447399889000&amp;api=v2" alt=""><br>这个表可以用flyway.baseline()方法去创建，flyway.migrate()是升级脚本的执行的方法，repair()是最新提供的一个回滚的方法，这样如果脚本出现异常，就不会将升级信息插入到schema_version。否则修改好脚本再次升级的时候就会报异常。<br>总结：<br>其实这个工具在处理create table、view或者是存储过程，函数，触发器之类的上面还是可以的，结合spring做成服务启动时运行或者是定时任务执行都可以。但如果修改表的字段就要写代码来配合使用（特别是有数据的表），这块我也没有试过，但是感觉也不是很方便的样子，如果有兴趣可以自己研究下。</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/学习/" rel="tag">#学习</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/21/jndi多数据源配置/" rel="next" title="jndi多数据源配置">
-                <i class="fa fa-chevron-left"></i> jndi多数据源配置
+              <a href="/2015/09/01/实施部署/" rel="next" title="实施部署">
+                <i class="fa fa-chevron-left"></i> 实施部署
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/09/01/实施部署/" rel="prev" title="实施部署">
-                实施部署 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/09/18/ORA-01810的错误/" rel="prev" title="ORA-01810的错误">
+                ORA-01810的错误 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
