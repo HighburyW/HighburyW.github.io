@@ -53,16 +53,16 @@
 
 
 
-<meta name="description" content="最近在这台机子上面装了个pyDev。但是在引用函数库的时候，出现红叉，提示:Undefined variable from import比较烦人，索然不影响编译，但是这么个红叉一直存在看着也很难受。在stackoverflow上面说这是pyDev引入包的一个bug。好吧。。。那就想办法将这个红叉给搞成不显示吧。我们可以在eclipse中设置Window -&amp;gt; Preferences -&amp;gt">
+<meta name="description" content="字符串格式化输出格式化字符串，是C、C++等程序设计语言printf类函数中用于指定输出参数的格式与相对位置的字符串参数。其中的转换说明（conversion specification）用于把随后对应的0个或多个函数参数转换为相应的格式输出；格式化字符串中转换说明以外的其它字符原样输出。Java中也有对应的格式化输出，是printf。下面在Python中举例：12&amp;gt;&amp;gt;&amp;gt; &quot;I">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pyDev报错">
-<meta property="og:url" content="http://yoursite.com/2015/06/30/pyDev报错/index.html">
+<meta property="og:title" content="Python中字符串格式化输出">
+<meta property="og:url" content="http://yoursite.com/2015/07/01/Python字符串处理/index.html">
 <meta property="og:site_name" content="HighburyW's blog">
-<meta property="og:description" content="最近在这台机子上面装了个pyDev。但是在引用函数库的时候，出现红叉，提示:Undefined variable from import比较烦人，索然不影响编译，但是这么个红叉一直存在看着也很难受。在stackoverflow上面说这是pyDev引入包的一个bug。好吧。。。那就想办法将这个红叉给搞成不显示吧。我们可以在eclipse中设置Window -&amp;gt; Preferences -&amp;gt">
-<meta property="og:updated_time" content="2015-11-10T14:12:46.347Z">
+<meta property="og:description" content="字符串格式化输出格式化字符串，是C、C++等程序设计语言printf类函数中用于指定输出参数的格式与相对位置的字符串参数。其中的转换说明（conversion specification）用于把随后对应的0个或多个函数参数转换为相应的格式输出；格式化字符串中转换说明以外的其它字符原样输出。Java中也有对应的格式化输出，是printf。下面在Python中举例：12&amp;gt;&amp;gt;&amp;gt; &quot;I">
+<meta property="og:updated_time" content="2015-12-03T11:58:31.329Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pyDev报错">
-<meta name="twitter:description" content="最近在这台机子上面装了个pyDev。但是在引用函数库的时候，出现红叉，提示:Undefined variable from import比较烦人，索然不影响编译，但是这么个红叉一直存在看着也很难受。在stackoverflow上面说这是pyDev引入包的一个bug。好吧。。。那就想办法将这个红叉给搞成不显示吧。我们可以在eclipse中设置Window -&amp;gt; Preferences -&amp;gt">
+<meta name="twitter:title" content="Python中字符串格式化输出">
+<meta name="twitter:description" content="字符串格式化输出格式化字符串，是C、C++等程序设计语言printf类函数中用于指定输出参数的格式与相对位置的字符串参数。其中的转换说明（conversion specification）用于把随后对应的0个或多个函数参数转换为相应的格式输出；格式化字符串中转换说明以外的其它字符原样输出。Java中也有对应的格式化输出，是printf。下面在Python中举例：12&amp;gt;&amp;gt;&amp;gt; &quot;I">
 
 
 
@@ -74,7 +74,7 @@
   };
 </script>
 
-  <title> pyDev报错 | HighburyW's blog </title>
+  <title> Python中字符串格式化输出 | HighburyW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -214,7 +214,7 @@
             
             
               
-                pyDev报错
+                Python中字符串格式化输出
               
             
           </h1>
@@ -223,8 +223,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-06-30T22:11:52+08:00" content="2015-06-30">
-              2015-06-30
+            <time itemprop="dateCreated" datetime="2015-07-01T13:19:32+08:00" content="2015-07-01">
+              2015-07-01
             </time>
           </span>
 
@@ -233,8 +233,8 @@
               &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -262,7 +262,36 @@
       
 
       
-        <span itemprop="articleBody"><p>最近在这台机子上面装了个pyDev。但是在引用函数库的时候，出现红叉，提示:<br><code>Undefined variable from import</code><br>比较烦人，索然不影响编译，但是这么个红叉一直存在看着也很难受。在stackoverflow上面说这是pyDev引入包的一个bug。好吧。。。那就想办法将这个红叉给搞成不显示吧。我们可以在eclipse中设置<code>Window -&gt; Preferences -&gt; PyDev -&gt; Editor -&gt; Code Analysis -&gt; Undefined -&gt; Undefined Variable From Import -&gt; Ignore</code><br>将引入包的异常改为忽略。然后重新restart。就看以看到没有红叉了，只有蓝色的感叹号来继续提示<code>Undefined variable from import</code>。哈，至少看不见红叉了。如果同学们有更好的方式解决，可以告诉我。</p>
+        <span itemprop="articleBody"><h4 id="字符串格式化输出">字符串格式化输出</h4><p>格式化字符串，是C、C++等程序设计语言printf类函数中用于指定输出参数的格式与相对位置的字符串参数。其中的转换说明（conversion specification）用于把随后对应的0个或多个函数参数转换为相应的格式输出；格式化字符串中转换说明以外的其它字符原样输出。Java中也有对应的格式化输出，是printf。下面在Python中举例：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; <span class="string">"I like %s"</span></span><br><span class="line"><span class="string">'I like %s'</span></span><br></pre></td></tr></table></figure></p>
+<p>%s就是一个占位符，代表这个可以被别的字符串给代替。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; <span class="string">"I like %s"</span> % <span class="string">"python"</span></span><br><span class="line"><span class="string">'I like python'</span></span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; <span class="string">"I like %s"</span> % <span class="string">"Java"</span></span><br><span class="line"><span class="string">'I like Java'</span></span><br></pre></td></tr></table></figure></p>
+<p>另外，不同的占位符，会表示那个位置应该被不同类型的对象填充。下面列出许多，供参考。不过，不用记忆，常用的只有%s和%d，或者再加上%f，其它的如果需要了，可以自己上网查查。</p>
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%s</td>
+<td style="text-align:right">字符串(采用str()的显示)</td>
+</tr>
+<tr>
+<td>%r</td>
+<td style="text-align:right">字符串(采用repr()的显示)</td>
+</tr>
+<tr>
+<td>%f</td>
+<td style="text-align:right">浮点数</td>
+</tr>
+</tbody>
+</table>
+<p>其实，上面这种格式化方法，常常被认为是太“古老”了。因为在python中还有新的格式化方法。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; s1 = <span class="string">"I like &#123;0&#125;"</span>.format(<span class="string">"python"</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; s1</span><br><span class="line"><span class="string">'I like python'</span></span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; s2 = <span class="string">"Lanzhou is more than &#123;0&#125; years. &#123;1&#125; lives in here."</span>.format(<span class="number">2500</span>, <span class="string">"my family"</span>) </span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; s2</span><br><span class="line"><span class="string">'Lanzhou is more than 2500 years. my family lives in here.'</span></span><br></pre></td></tr></table></figure></p>
+<p>还有一种是字典的形式，是最麻烦的，有兴趣可以上网去找找，一般用format就很好了，简单明了。</p>
+<h4 id="常用的字符串方法">常用的字符串方法</h4><h5 id="split">split</h5><p>这个函数的作用是将字符串根据某个分割符进行分割。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="tag">a</span> = <span class="string">"I LOVE PYTHON"</span></span><br><span class="line">&gt;&gt;&gt; <span class="tag">a</span>.<span class="function"><span class="title">split</span><span class="params">(<span class="string">" "</span>)</span></span></span><br><span class="line">[<span class="string">'I'</span>, <span class="string">'LOVE'</span>, <span class="string">'PYTHON'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>还是跟Java中的方法差不多。最后得到一个list。</p>
+<h5 id="去掉字符串两头的空格">去掉字符串两头的空格</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">S.<span class="function"><span class="title">strip</span><span class="params">()</span></span>  去掉字符串的左右空格</span><br><span class="line">S.<span class="function"><span class="title">lstrip</span><span class="params">()</span></span> 去掉字符串的左边空格</span><br><span class="line">S.<span class="function"><span class="title">rstrip</span><span class="params">()</span></span> 去掉字符串的右边空格</span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -280,8 +309,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/05/05/杂七杂八/" rel="next" title="杂七杂八（一）">
-                <i class="fa fa-chevron-left"></i> 杂七杂八（一）
+              <a href="/2015/06/30/Python的索引与切片/" rel="next" title="Python中的索引与切片">
+                <i class="fa fa-chevron-left"></i> Python中的索引与切片
               </a>
             
           </div>
@@ -372,7 +401,7 @@ var duoshuoQuery = {short_name:"laki"};
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -444,7 +473,7 @@ var duoshuoQuery = {short_name:"laki"};
               
             
             
-              <p class="post-toc-empty">此文章未包含目錄</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串格式化输出"><span class="nav-number">1.</span> <span class="nav-text">字符串格式化输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的字符串方法"><span class="nav-number">2.</span> <span class="nav-text">常用的字符串方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#split"><span class="nav-number">2.1.</span> <span class="nav-text">split</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#去掉字符串两头的空格"><span class="nav-number">2.2.</span> <span class="nav-text">去掉字符串两头的空格</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

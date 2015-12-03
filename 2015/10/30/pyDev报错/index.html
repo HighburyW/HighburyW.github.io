@@ -37,7 +37,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="学习," />
 
 
 
@@ -53,19 +53,16 @@
 
 
 
-<meta name="description" content="maven快速入门
-maven介绍以及环境搭建maven是基于项目对象模型(pom),可以通过一小段描述信息来管理项目的构建、报告、和文档的软件项目管理工具。覆盖编译，打包，清理等周期。maven下载地址下载解压后有四个文件夹。bin中是一些mvn的运行脚本。在命令行中可以用mvn进行调用这些脚本。boot下面是一个maven的类加载器的框架。config下面是配置文件，例如主要的settings">
+<meta name="description" content="最近在这台机子上面装了个pyDev。但是在引用函数库的时候，出现红叉，提示:Undefined variable from import比较烦人，索然不影响编译，但是这么个红叉一直存在看着也很难受。在stackoverflow上面说这是pyDev引入包的一个bug。好吧。。。那就想办法将这个红叉给搞成不显示吧。我们可以在eclipse中设置Window -&amp;gt; Preferences -&amp;gt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Maven知识整理">
-<meta property="og:url" content="http://yoursite.com/2015/08/04/Maven知识整理/index.html">
+<meta property="og:title" content="pyDev报错">
+<meta property="og:url" content="http://yoursite.com/2015/10/30/pyDev报错/index.html">
 <meta property="og:site_name" content="HighburyW's blog">
-<meta property="og:description" content="maven快速入门
-maven介绍以及环境搭建maven是基于项目对象模型(pom),可以通过一小段描述信息来管理项目的构建、报告、和文档的软件项目管理工具。覆盖编译，打包，清理等周期。maven下载地址下载解压后有四个文件夹。bin中是一些mvn的运行脚本。在命令行中可以用mvn进行调用这些脚本。boot下面是一个maven的类加载器的框架。config下面是配置文件，例如主要的settings">
-<meta property="og:updated_time" content="2015-08-04T02:28:27.133Z">
+<meta property="og:description" content="最近在这台机子上面装了个pyDev。但是在引用函数库的时候，出现红叉，提示:Undefined variable from import比较烦人，索然不影响编译，但是这么个红叉一直存在看着也很难受。在stackoverflow上面说这是pyDev引入包的一个bug。好吧。。。那就想办法将这个红叉给搞成不显示吧。我们可以在eclipse中设置Window -&amp;gt; Preferences -&amp;gt">
+<meta property="og:updated_time" content="2015-12-03T11:57:44.137Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Maven知识整理">
-<meta name="twitter:description" content="maven快速入门
-maven介绍以及环境搭建maven是基于项目对象模型(pom),可以通过一小段描述信息来管理项目的构建、报告、和文档的软件项目管理工具。覆盖编译，打包，清理等周期。maven下载地址下载解压后有四个文件夹。bin中是一些mvn的运行脚本。在命令行中可以用mvn进行调用这些脚本。boot下面是一个maven的类加载器的框架。config下面是配置文件，例如主要的settings">
+<meta name="twitter:title" content="pyDev报错">
+<meta name="twitter:description" content="最近在这台机子上面装了个pyDev。但是在引用函数库的时候，出现红叉，提示:Undefined variable from import比较烦人，索然不影响编译，但是这么个红叉一直存在看着也很难受。在stackoverflow上面说这是pyDev引入包的一个bug。好吧。。。那就想办法将这个红叉给搞成不显示吧。我们可以在eclipse中设置Window -&amp;gt; Preferences -&amp;gt">
 
 
 
@@ -77,7 +74,7 @@ maven介绍以及环境搭建maven是基于项目对象模型(pom),可以通过�
   };
 </script>
 
-  <title> Maven知识整理 | HighburyW's blog </title>
+  <title> pyDev报错 | HighburyW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -217,7 +214,7 @@ maven介绍以及环境搭建maven是基于项目对象模型(pom),可以通过�
             
             
               
-                Maven知识整理
+                pyDev报错
               
             
           </h1>
@@ -226,8 +223,8 @@ maven介绍以及环境搭建maven是基于项目对象模型(pom),可以通过�
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-08-04T10:02:22+08:00" content="2015-08-04">
-              2015-08-04
+            <time itemprop="dateCreated" datetime="2015-10-30T22:11:52+08:00" content="2015-10-30">
+              2015-10-30
             </time>
           </span>
 
@@ -236,8 +233,8 @@ maven介绍以及环境搭建maven是基于项目对象模型(pom),可以通过�
               &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">Maven</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -265,107 +262,31 @@ maven介绍以及环境搭建maven是基于项目对象模型(pom),可以通过�
       
 
       
-        <span itemprop="articleBody"><h3 id="maven快速入门">maven快速入门</h3><ol>
-<li>maven介绍以及环境搭建<br>maven是基于项目对象模型(pom),可以通过一小段描述信息来管理项目的构建、<br>报告、和文档的软件项目管理工具。覆盖编译，打包，清理等周期。<br><a href="http://maven.apache.org" target="_blank" rel="external">maven下载地址</a><br>下载解压后有四个文件夹。bin中是一些mvn的运行脚本。在命令行中可以用mvn进行调用这些脚本。<br>boot下面是一个maven的类加载器的框架。config下面是配置文件，例如主要的settings配置文件。<br>lib目录下面是maven常用的一些jar。</li>
-<li>配置环境变量<br>在系统变量中新建一个M2_HOME路径为maven的安装目录。<br>然后在path中加入%M2_HOME/bin。然后在命令行中输入mvn -v来查看是否安装成功。</li>
-<li>maven pom文件中几个属性值<br>groupId为项目的包名;<br>artifactId是模块名（项目名）;<br>version SNAPSHOT就是快照（一般用0.0.1SNAPSHOT）;</li>
-</ol>
-<h3 id="maven核心知识">maven核心知识</h3><ol>
-<li>常用的构建命令<br>mvn- v 查看版本<br>  compile 编译<br>  test 测试<br>  package 打包<br>  clean 删除target<br>  install 安装jar到本地仓库中 </li>
-<li>自动创建目录骨架 archetype插件<br>mvn -archetype generate 下载插件<br>按照提示去创建，也可以直接在后面跟上 -DgroupId -DartifactId -Dversion -Dpackage</li>
-<li>maven中的坐标和仓库<br>坐标：groupId为项目的包名<br>   artifactId是模块名（项目名）<br>   version 版本<br>仓库：本地<br>   远程(lib目录下面的maven-model-bulider.jar中pom文件中)<br>镜像仓库：settings.xml中的mirrors中的mirror<br>更改仓库位置：settings.xml中localRepository属性进行配置更改<pre><code>例如改为<span class="constant">E</span><span class="symbol">:/myMavenStore</span>,然后将settings文件放到当前文件夹中，方便以后修改管理
-</code></pre></li>
-<li>在eclipse4.0以后，将maven插件是内置的不需要下载。如果用以前的版本，可以下载插件，不再赘述。<br>在eclipse中选择新建maven项目有两种。<br>maven-archetype-quickstart<br>默认的Archetype,基本内容包括：<br>一个包含junit依赖声明的pom.xml<br>src/main/java主代码目录及一个名为App的类<br>src/test/java测试代码目录及一个名为AppTest的测试用例<br>maven-archetype-webapp<br>一个最简单的Maven war项目模板，当需要快速创建一个Web应用的时候可以使用它。生成的项目内容包括：<br>一个packaging为war且带有junit依赖声明的pom.xml<br>src/main/webapp/目录<br>src/main/webapp/index.jsp文件<br>src/main/webapp/WEB-INF/web.xml文件</li>
-<li><p>maven的生命周期和插件<br>完整的项目构建过程包括：<br>清理，编译，测试，打包，集成测试，验证，部署<br>maven的生命周期：</p>
-<pre><code>clean   清理项目
-<span class="keyword">default</span> 构建项目
-<span class="keyword">compile</span> test <span class="keyword">package</span> install
-site    生成项目站点
-pre-site 在生成站点前完成的工作
-site 生成项目的站点文档
-post-site 在生成项目站点后要完成的工作
-site-deploy 发布生成的站点到服务器上
-</code></pre><p>maven的插件有很多。比如将项目源码打包的source，还有代码检测的findbugs等等。<br>具体配置例如：</p>
-<pre><code>`<span class="tag">&lt;<span class="title">plugin</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>findbugs-maven-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">version</span>&gt;</span>${findbugs-maven-plugin.version}<span class="tag">&lt;/<span class="title">version</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">executions</span>&gt;</span>
-                <span class="tag">&lt;<span class="title">execution</span>&gt;</span>
-                <span class="comment">&lt;!--阶段--&gt;</span>
-                    <span class="tag">&lt;<span class="title">phase</span>&gt;</span>verify<span class="tag">&lt;/<span class="title">phase</span>&gt;</span>
-                <span class="comment">&lt;!--目标--&gt;</span>
-                    <span class="tag">&lt;<span class="title">goals</span>&gt;</span>
-                         <span class="tag">&lt;<span class="title">goal</span>&gt;</span>check<span class="tag">&lt;/<span class="title">goal</span>&gt;</span>
-                    <span class="tag">&lt;/<span class="title">goals</span>&gt;</span>
-                <span class="tag">&lt;/<span class="title">execution</span>&gt;</span>
-            <span class="tag">&lt;/<span class="title">executions</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">plugin</span>&gt;</span>`
-</code></pre></li>
-<li><p>pom讲解<br>pom中的标签<br>详解<a href="http://blog.csdn.net/sunzhenhua0608/article/details/32938533" target="_blank" rel="external">http://blog.csdn.net/sunzhenhua0608/article/details/32938533</a></p>
-</li>
-<li>依赖范围<br>控制依赖与具体classpath的关系<br>scope ：<br>  compile  默认的范围，编译，测试运行都有效<br>  provided  编译和测试时有效<br>  runtime  测试和运行时有效<br>  test   测试的时候有效<br>  system  编译和测试时有效，要与本地项目相关联<br>  import 只用在dependencyManagement中，表示从其他的pom中导入dependency的配置</li>
-<li>依赖传递<br>A&gt;B&gt;C<br>B依赖A，C依赖B<br>在B中配置，<pre><code>`<span class="tag">&lt;<span class="title">dependencies</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>A<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>A<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-        <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span> `
-</code></pre>在C中配置<pre><code>`<span class="tag">&lt;<span class="title">dependencies</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>B<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>B<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-        <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span>`
-</code></pre>但是这样存在一个问题，由于依赖存在传递性，其实C中也存在A，但是C不需要依赖A，只需要依赖B即可<br>所以我们可以加上如下的配置：<pre><code>`<span class="tag">&lt;<span class="title">dependencies</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>B<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>B<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">exclusions</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">exclusion</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>A<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>A<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
-            <span class="tag">&lt;/<span class="title">exclusion</span>&gt;</span>
-            <span class="tag">&lt;/<span class="title">exclusions</span>&gt;</span>
-        <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span>`
-</code></pre></li>
-<li>依赖冲突<br>依赖冲突就是说A，B依赖了不同的版本一个构建，但是C又同时依赖A,B.这样就导致了版本冲突。<br>解决的方案：<pre><code>9<span class="class">.1</span> 短路优先  依据读取的路径，依赖离得最近的优先解析。
-     举例：<span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">C</span>&gt;<span class="tag">X</span><span class="class">.jar</span>
-           <span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">X</span><span class="class">.1</span><span class="class">.jar</span>
-     优先解析的是   <span class="tag">A</span>&gt;<span class="tag">B</span>&gt;<span class="tag">X</span><span class="class">.1</span><span class="class">.jar</span>
-9<span class="class">.2</span> 先声明先优先  如果路径也相同，那就是看配置的先后顺序
-</code></pre></li>
-<li>聚合和继承<pre><code>10.1 聚合
-     如果将多个项目<span class="operator"><span class="keyword">install</span>安装到本地仓库中，对此依次执行，但是可以有聚合的方式，一次执行它。
-     在聚合项目的pom中将最上面的package改为pom。不用dependencys 而是使用modules 然后将<span class="keyword">install</span>的项目配置的<span class="keyword">module</span>标签中。
-     (eclipse可以自动提示)
-<span class="number">10.2</span> 继承 
-     使用parent标签。</span>
-</code></pre></li>
-</ol>
+        <span itemprop="articleBody"><p>最近在这台机子上面装了个pyDev。但是在引用函数库的时候，出现红叉，提示:<br><code>Undefined variable from import</code><br>比较烦人，索然不影响编译，但是这么个红叉一直存在看着也很难受。在stackoverflow上面说这是pyDev引入包的一个bug。好吧。。。那就想办法将这个红叉给搞成不显示吧。我们可以在eclipse中设置<code>Window -&gt; Preferences -&gt; PyDev -&gt; Editor -&gt; Code Analysis -&gt; Undefined -&gt; Undefined Variable From Import -&gt; Ignore</code><br>将引入包的异常改为忽略。然后重新restart。就看以看到没有红叉了，只有蓝色的感叹号来继续提示<code>Undefined variable from import</code>。哈，至少看不见红叉了。如果同学们有更好的方式解决，可以告诉我。</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/学习/" rel="tag">#学习</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/26/Socket应用/" rel="next" title="Socket应用">
-                <i class="fa fa-chevron-left"></i> Socket应用
+              <a href="/2015/09/24/Java动态代理机制分析/" rel="next" title="Java动态代理机制分析">
+                <i class="fa fa-chevron-left"></i> Java动态代理机制分析
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/08/04/Java删除ArrayList中重复的元素/" rel="prev" title="Java删除ArrayList中重复的元素">
-                Java删除ArrayList中重复的元素 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,7 +440,7 @@ var duoshuoQuery = {short_name:"laki"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#maven快速入门"><span class="nav-number">1.</span> <span class="nav-text">maven快速入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maven核心知识"><span class="nav-number">2.</span> <span class="nav-text">maven核心知识</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目錄</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

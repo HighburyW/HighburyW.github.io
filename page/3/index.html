@@ -222,6 +222,202 @@
             
               
                 
+                <a class="post-title-link" href="/2015/06/30/Python的索引与切片/" itemprop="url">
+                  Python中的索引与切片
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-06-30T20:20:02+08:00" content="2015-06-30">
+              2015-06-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h4 id="1-索引">1.索引</h4><p>直接举例子说明：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; lang = <span class="string">"study python"</span></span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; lang[<span class="number">0</span>]</span><br><span class="line"><span class="string">'s'</span></span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; lang[<span class="number">1</span>]</span><br><span class="line"><span class="string">'t'</span></span><br></pre></td></tr></table></figure></p>
+<p>有一个字符串，通过赋值语句赋给了变量lang。如果要得到这个字符串的第一个单词s，可以用lang[0]。当然，如果你不愿意通过赋值语句，让变量lang来指向那个字符串，也可以这样做：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; <span class="string">"study python"</span>[<span class="number">0</span>]</span><br><span class="line"><span class="string">'s'</span></span><br></pre></td></tr></table></figure></p>
+<p>也可以反过来通过字符也找到对应的索引值：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; lang.<span class="function"><span class="title">index</span><span class="params">(<span class="string">"p"</span>)</span></span></span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="2-切片">2.切片</h4><p>还是直接上例子：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; lang</span><br><span class="line"><span class="string">'study python'</span>   </span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; lang[<span class="number">2</span><span class="symbol">:</span><span class="number">9</span>]</span><br><span class="line"><span class="string">'udy pyt'</span></span><br></pre></td></tr></table></figure></p>
+<p>从上面的例子就可以看到，我们得到的是以第二个索引开始，第九个索引之前的所有字符。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/05/杂七杂八/" itemprop="url">
+                  杂七杂八（一）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-05-05T22:03:44+08:00" content="2015-05-05">
+              2015-05-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/杂七杂八/" itemprop="url" rel="index">
+                    <span itemprop="name">杂七杂八</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>　　今年公司提出每天多少要写点代码分析，以及每周五进行代码分享。这个建议不错，知识那么多，好记性不如烂笔头，每天记录些还是很有好处的。自己也写了很多篇代码分析了，都是自己在平时工作学习中总结或者解决的一些知识。我的初衷还是想写点真正有质量的，网上不是随地可见的知识分享给大家的。但是由于自己身上的惰性，很多东西领悟了但是没有很好的记录下来，也没有很好的巩固，所以有些比较难的地方，说的不是很透彻。我是相当愿意将知识很通俗的解释给别人听的，比如有时候测试的同事就会问一些web应用配置上面的问题，因为有些是设置spring的一些知识，所以要给人讲明白讲清楚，这样就会用一些通俗的语言去解释这些东西。所以知道再讲出来，再到讲出来大家都能理解。这是一个锻炼自己的过程。还有一些知识是自己没有学习过的，在平时的工作中也没有遇到过，写出来的话，能够抛砖引玉，让别的同事来指导一下，请教会这种知识的人，也未尝不是一件乐趣啊。<br>　　所以，要多写写，写出来给大家看，文章中有不对的地方也能按照别人的建议修改，及时纠正错误。这是一种相互学习的过程。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/05/04/oracle与sqlserver关于取日期年，月，日的情况/" itemprop="url">
                   oracle与sqlserver关于取日期年，月，日的情况
                 </a>
@@ -352,7 +548,7 @@ ELSE
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>

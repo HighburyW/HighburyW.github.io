@@ -222,6 +222,102 @@
             
               
                 
+                <a class="post-title-link" href="/2015/10/30/pyDev报错/" itemprop="url">
+                  pyDev报错
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-10-30T22:11:52+08:00" content="2015-10-30">
+              2015-10-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>最近在这台机子上面装了个pyDev。但是在引用函数库的时候，出现红叉，提示:<br><code>Undefined variable from import</code><br>比较烦人，索然不影响编译，但是这么个红叉一直存在看着也很难受。在stackoverflow上面说这是pyDev引入包的一个bug。好吧。。。那就想办法将这个红叉给搞成不显示吧。我们可以在eclipse中设置<code>Window -&gt; Preferences -&gt; PyDev -&gt; Editor -&gt; Code Analysis -&gt; Undefined -&gt; Undefined Variable From Import -&gt; Ignore</code><br>将引入包的异常改为忽略。然后重新restart。就看以看到没有红叉了，只有蓝色的感叹号来继续提示<code>Undefined variable from import</code>。哈，至少看不见红叉了。如果同学们有更好的方式解决，可以告诉我。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/09/24/Java动态代理机制分析/" itemprop="url">
                   Java动态代理机制分析
                 </a>
@@ -771,106 +867,6 @@ after rent house`
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/21/jndi多数据源配置/" itemprop="url">
-                  jndi多数据源配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-08-21T23:12:29+08:00" content="2015-08-21">
-              2015-08-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>今天早上跟领导讨论下关于报表服务启动一个，同时由稽查和收费两个系统访问的问题。这样就省的再启动一个多余的report服务，节省了服务器资源。所以我用中午的时间做了一下测试，验证了一下。其实这个主要的问题还是在于是否支持多数据源，因为稽查和收费不在同一个数据库中。查看下fineReport的api，这个工具是能够同时支持多个数据源的。然后再看spring,spring对多数据源也能够很好的支持。所以问题就迎刃而解了。下面是测试的步骤：<br>1.配置applicationContext.xml。</p>
-<p><code>&lt;!-- 收费--&gt;</code><br><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;&gt;</code><br>        <code>&lt;property name=&quot;resourceRef&quot;&gt;</code><br>            <code>&lt;value&gt;true&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>        <code>&lt;property name=&quot;jndiName&quot;&gt;</code><br>            <code>&lt;value&gt;jdbc/toll&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>    <code>&lt;/bean&gt;</code><br><code>&lt;!-- 稽查--&gt;</code><br>        <code>&lt;bean id=&quot;auditDataSource&quot; class=&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;&gt;</code><br>        <code>&lt;property name=&quot;resourceRef&quot;&gt;</code><br>            <code>&lt;value&gt;true&lt;/value&gt;</code><br>       <code>&lt;/property&gt;</code><br>       <code>&lt;property name=&quot;jndiName&quot;&gt;</code><br>           <code>&lt;value&gt;jdbc/audit&lt;/value&gt;</code><br>       <code>&lt;/property&gt;</code><br>    <code>&lt;/bean&gt;</code></p>
-<p>这里面report项目中并不需要jdbctemper之类的，所以不需要来引用datasource。如果在别的项目中的话，需要重写下AbstractRoutingDataSource的determineCurrentLookupKey方法来获得不同的数据源。这个类的父类AbstractDataSource是spring获得数据源的类。今天只是测试report的服务，所以没再继续看这块。<br>2.配置jndi</p>
-<p><code>&lt;New</code><br>      <code>id=&quot;toll&quot;</code><br>       <code>class=&quot;org.eclipse.jetty.plus.jndi.Resource&quot;&gt;</code><br>       <code>&lt;Arg&gt;jdbc/toll&lt;/Arg&gt;</code><br>      <code>&lt;Arg&gt;  &lt;New class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;</code><br>                <code>&lt;Set name=&quot;driverClass&quot;&gt;oracle.jdbc.driver.OracleDriver&lt;/Set&gt;</code><br>                <code>&lt;Set name=&quot;jdbcUrl&quot;&gt;jdbc:oracle:thin:@172.16.2.69:1521:ahltollglc&lt;/Set&gt;</code><br>                <code>&lt;Set name=&quot;user&quot;&gt;dbuser1&lt;/Set&gt;</code><br>               <code>&lt;Set name=&quot;password&quot;&gt;wtkjdb1&lt;/Set&gt;</code><br>               <code>&lt;/New&gt;</code><br>        <code>&lt;/Arg&gt;</code><br>    <code>&lt;/New&gt;</code><br>    <code>&lt;New</code><br>        <code>id=&quot;audit&quot;</code><br>       <code>class=&quot;org.eclipse.jetty.plus.jndi.Resource&quot;&gt;</code><br>        <code>&lt;Arg&gt;jdbc/audit&lt;/Arg&gt;</code><br>        <code>&lt;Arg&gt;</code><br>            <code>&lt;New class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;</code><br>               <code>&lt;Set name=&quot;driverClass&quot;&gt;oracle.jdbc.driver.OracleDriver&lt;/Set&gt;</code><br>               <code>&lt;Set name=&quot;jdbcUrl&quot;&gt;jdbc:oracle:thin:@172.16.2.69:1521:ahltolljc&lt;/Set&gt;</code><br>               <code>&lt;Set name=&quot;user&quot;&gt;dbuser2&lt;/Set&gt;</code><br>               <code>&lt;Set name=&quot;password&quot;&gt;wtkjdb2&lt;/Set&gt;</code><br>           <code>&lt;/New&gt;</code><br>       <code>&lt;/Arg&gt;</code><br>   <code>&lt;/New&gt;</code></p>
-<p>3.修改报表模板中的数据源名字<br>这里只需要切换一下，在报表模板文件中的datasource的名字。如我们将稽查的数据源的名字定义为auditDataSource。然后只需要将模板中的DatabaseName改为这个名字即可。如：<br><code>&lt;DatabaseName&gt;&lt;![CDATA[auditDataSource]]&gt;&lt;/DatabaseName&gt;</code><br>修改DatabaseName节点，将模板中的节点名字依次替换。<br>然后测试了一下，只启动一个report服务，用稽查和收费同时调用，都能够正确的显示报表。所以以后实施部署的时候，稽查和收费完全可以只部署一个report服务，既省了工作量，又节省了服务器资源。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -917,7 +913,7 @@ after rent house`
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
