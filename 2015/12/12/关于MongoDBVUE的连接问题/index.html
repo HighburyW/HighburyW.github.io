@@ -53,16 +53,16 @@
 
 
 
-<meta name="description" content="关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。在tomcat上面：&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;qu">
+<meta name="description" content="在以前学习MongoDB的时候一直用的是shell，最近接触到一个付费的可视化软件MongoDBVUE,不过在连接的时候出现一点问题。连接成功后，Collections中一直不显示数据，后来发现是auth的问题，在我们用mongod启用数据库的时候，如果加了auth，那我们就在连接的时候用用户名密码，不用auth，在连接的时候就不要用户名密码。这点与关系型数据库就有区别，关系型数据库连接的时候必须">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于spring配置文件中resourceRef的配置">
-<meta property="og:url" content="http://yoursite.com/2015/08/27/关于spring配置文件中resourceRef的配置/index.html">
+<meta property="og:title" content="关于MongoDBVUE的连接问题">
+<meta property="og:url" content="http://yoursite.com/2015/12/12/关于MongoDBVUE的连接问题/index.html">
 <meta property="og:site_name" content="HighburyW's blog">
-<meta property="og:description" content="关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。在tomcat上面：&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;qu">
-<meta property="og:updated_time" content="2015-11-08T07:47:14.459Z">
+<meta property="og:description" content="在以前学习MongoDB的时候一直用的是shell，最近接触到一个付费的可视化软件MongoDBVUE,不过在连接的时候出现一点问题。连接成功后，Collections中一直不显示数据，后来发现是auth的问题，在我们用mongod启用数据库的时候，如果加了auth，那我们就在连接的时候用用户名密码，不用auth，在连接的时候就不要用户名密码。这点与关系型数据库就有区别，关系型数据库连接的时候必须">
+<meta property="og:updated_time" content="2015-12-27T14:30:37.548Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于spring配置文件中resourceRef的配置">
-<meta name="twitter:description" content="关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。在tomcat上面：&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;qu">
+<meta name="twitter:title" content="关于MongoDBVUE的连接问题">
+<meta name="twitter:description" content="在以前学习MongoDB的时候一直用的是shell，最近接触到一个付费的可视化软件MongoDBVUE,不过在连接的时候出现一点问题。连接成功后，Collections中一直不显示数据，后来发现是auth的问题，在我们用mongod启用数据库的时候，如果加了auth，那我们就在连接的时候用用户名密码，不用auth，在连接的时候就不要用户名密码。这点与关系型数据库就有区别，关系型数据库连接的时候必须">
 
 
 
@@ -74,7 +74,7 @@
   };
 </script>
 
-  <title> 关于spring配置文件中resourceRef的配置 | HighburyW's blog </title>
+  <title> 关于MongoDBVUE的连接问题 | HighburyW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -214,7 +214,7 @@
             
             
               
-                关于spring配置文件中resourceRef的配置
+                关于MongoDBVUE的连接问题
               
             
           </h1>
@@ -223,8 +223,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-08-27T15:33:04+08:00" content="2015-08-27">
-              2015-08-27
+            <time itemprop="dateCreated" datetime="2015-12-12T15:33:04+08:00" content="2015-12-12">
+              2015-12-12
             </time>
           </span>
 
@@ -233,8 +233,8 @@
               &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
                   </a>
                 </span>
 
@@ -262,9 +262,7 @@
       
 
       
-        <span itemprop="articleBody"><p>关于spring配置文件中resourceRef的配置。收费站和管理处的程序，有些是部署在tomcat，有些是部署在weblogic上面。但是在不同的容器中resourceRef的配置是不同的，我们在代码中默认是false，但在tomcat上面要设置true，这样才能保证服务能够正常的启动。<br>在tomcat上面：<br><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;&gt;</code><br>        <code>&lt;property name=&quot;resourceRef&quot;&gt;</code><br>            <code>&lt;value&gt;true&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>        <code>&lt;property name=&quot;jndiName&quot;&gt;</code><br>            <code>&lt;value&gt;jdbc/toll&lt;/value&gt;</code><br>        <code>&lt;/property&gt;</code><br>    <code>&lt;/bean&gt;</code><br>我查了一下JndiObjectFactoryBean中的关于resourceRef的描述，在JndiLocatorSupport的抽象类中有这样的解释:</p>
-<p>   <code>/**</code><br>     <code>* Set whether the lookup occurs in a J2EE container, i.e. if the prefix</code><br>     <code>* &quot;java:comp/env/&quot; needs to be added if the JNDI name doesn&#39;t already</code><br>     <code>* contain it. Default is &quot;false&quot;.</code><br>     <code>* &lt;p&gt;Note: Will only get applied if no other scheme (e.g. &quot;java:&quot;) is given.</code><br>     <code>*/</code></p>
-<p>所以在tomcat中设置jndi的时候需要加上java:comp/env/，因此要设置为true，因为设置成为true之后，程序会自动添加java:comp/env/给jndi。设置为true对weblogic，jetty这些容器也不会产生影响，这样的话，我们在下收费站实施部署的时候，就不用考虑容器是什么而去修改这些配置文件了。</p>
+        <span itemprop="articleBody"><p>在以前学习MongoDB的时候一直用的是shell，最近接触到一个付费的可视化软件MongoDBVUE,不过在连接的时候出现一点问题。连接成功后，Collections中一直不显示数据，后来发现是auth的问题，在我们用mongod启用数据库的时候，如果加了auth，那我们就在连接的时候用用户名密码，不用auth，在连接的时候就不要用户名密码。这点与关系型数据库就有区别，关系型数据库连接的时候必须是要有用户名和密码的。而MongoDB不要用户名密码就能够进行登录。</p>
 </span>
       
     </div>
@@ -282,17 +280,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/21/jndi多数据源配置/" rel="next" title="jndi多数据源配置">
-                <i class="fa fa-chevron-left"></i> jndi多数据源配置
+              <a href="/2015/10/30/pyDev报错/" rel="next" title="pyDev报错">
+                <i class="fa fa-chevron-left"></i> pyDev报错
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/09/01/实施部署/" rel="prev" title="实施部署">
-                实施部署 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

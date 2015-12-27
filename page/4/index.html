@@ -56,7 +56,7 @@
 <meta name="description" content="Walk steps step by step">
 <meta property="og:type" content="website">
 <meta property="og:title" content="HighburyW's blog">
-<meta property="og:url" content="http://yoursite.com/categories/Python/index.html">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="HighburyW's blog">
 <meta property="og:description" content="Walk steps step by step">
 <meta name="twitter:card" content="summary">
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title> 分類: Python | HighburyW's blog </title>
+  <title> HighburyW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -94,7 +94,9 @@
 
 
 
-  <div class="container one-column ">
+  <div class="container one-column 
+   page-home 
+">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -191,103 +193,126 @@
       <div class="main-inner">
         <div id="content" class="content">
           
+  <section id="posts" class="posts-expand">
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Python
-        <small>分類</small>
-      </h2>
+    
+
+    
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/04/oracle与sqlserver关于取日期年，月，日的情况/" itemprop="url">
+                  oracle与sqlserver关于取日期年，月，日的情况
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-05-04T16:01:48+08:00" content="2015-05-04">
+              2015-05-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>用sqlserver去实现查询某一旬的数据，用的day去实现。<br>例如：</p>
+<p><code>if  day(&#39;${endDT}&#39;)&lt;=10
+(SELECT stockBox,stockCard  from IC_BalanceUpload where FinDT=dateAdd(dd, -day(&#39;${endDT}&#39;)+1, &#39;${endDT}&#39;) and offStaID=${orgCode}) 
+else IF  day(&#39;${endDT}&#39;)&lt;=20
+(SELECT stockBox,stockCard  from IC_BalanceUpload where FinDT=dateAdd(dd, -day(&#39;${endDT}&#39;)+11, &#39;${endDT}&#39;) and offStaID=${orgCode}) 
+ELSE
+(SELECT stockBox,stockCard  from IC_BalanceUpload where FinDT=dateAdd(dd, -day(&#39;${endDT}&#39;)+21, &#39;${endDT}&#39;) and offStaID=${orgCode})</code><br>现在要转为oracle的，发现oracle中可以有两种实现sqlsever中类似于day函数。<br>第一种：</p>
+<p><code>select extract(day from to_date(&#39;2015-4-29&#39;,&#39;yyyy-mm-dd&#39;)) as dd from dual;</code><br>第二种：</p>
+<p><code>Select to_char(to_date(&#39;2015-4-29&#39;,&#39;yyyy-mm-dd&#39;),&#39;dd&#39;) as dd from dual;</code><br>相对于第二种来讲，第一种方法省去类型转换，更加简洁一点。相应的转换sqlserver中的month或者year函数的时候可以用yyyy和mm来代替。</p>
+<p>关于oracle中根据日期取不同旬数据，我还是像第一段sql一样根据取日期去分别判断的，不知道除此之外还有没有更好的方法去实现，求推荐。ps：不用自定义函数之类。</p>
+
+            
+          </span>
+        
+      
     </div>
 
-    
+    <footer class="post-footer">
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
 
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/10/30/pyDev报错/" itemprop="url">
-              
-                <span itemprop="name">pyDev报错</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-10-30T22:11:52+08:00"
-              content="2015-10-30" >
-          10-30
-        </time>
-      </div>
-
-    </header>
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
     
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/07/01/Python字符串处理/" itemprop="url">
-              
-                <span itemprop="name">Python中字符串格式化输出</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-07-01T13:19:32+08:00"
-              content="2015-07-01" >
-          07-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/06/30/Python的索引与切片/" itemprop="url">
-              
-                <span itemprop="name">Python中的索引与切片</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-06-30T20:20:02+08:00"
-              content="2015-06-30" >
-          06-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
 
 
 
@@ -433,12 +458,6 @@
 
   
   
-  
-    <script type="text/javascript">
-      postMotionOptions = {stagger: 100, drag: true};
-    </script>
-  
-
 
   
     
